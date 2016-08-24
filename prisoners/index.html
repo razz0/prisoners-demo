@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="facetApp">
+<head>
+  <base href="/">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+  <title>Sotasampo - Menehtyneet</title>
+
+  <!-- build:css(.) styles/vendor.css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- endbuild -->
+  <!-- build:css({.,prisoners}) styles/facetedsearch.css -->
+  <link rel="stylesheet" href="facetedsearch.css">
+  <!-- endbuild -->
+
+</head>
+
+<body>
+
+  <div ui-view></div>
+
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/ng-table/dist/ng-table.min.js"></script>
+  <script src="bower_components/angular-translate/angular-translate.js"></script>
+  <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/lodash/lodash.js"></script>
+  <script src="bower_components/angular-paging-sparql-service/dist/sparql-service.js"></script>
+  <script src="bower_components/spin.js/spin.js"></script>
+  <script src="bower_components/angular-spinner/angular-spinner.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/sparql-faceter/dist/semantic-faceted-search.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:js({.,prisoners}) scripts/scripts.js -->
+  <script src="facet-app.module.js"></script>
+  <script src="person.mapper.js"></script>
+  <script src="prisoner.service.js"></script>
+  <script src="ws-navbar.directive.js"></script>
+  <script src="ws-page-link.directive.js"></script>
+  <script src="facet-app.main-controller.js"></script>
+  <!-- endbuild -->
+
+</body>
+</html>
