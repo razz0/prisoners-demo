@@ -1,4 +1,4 @@
-# casualties-demo
+# prisoners-demo
 Prisoners of War perspective of the WarSampo portal. 
 
 Installation
