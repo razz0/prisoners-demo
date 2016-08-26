@@ -37,7 +37,9 @@
             // Basic facets
             '<http://ldf.fi/schema/warsa/prisoners/occupation>': { name: 'OCCUPATION' },
 //            '<http://ldf.fi/schema/warsa/prisoners/cause_of_death>': { name: 'CAUSE_OF_DEATH' },
-            '<http://ldf.fi/schema/warsa/prisoners/marital_status>': { name: 'MARITAL_STATUS' }
+            '<http://ldf.fi/schema/warsa/prisoners/marital_status>': { name: 'MARITAL_STATUS' },
+            '<http://ldf.fi/schema/warsa/prisoners/unit>': { name: 'UNIT', enabled: true },
+            '<http://ldf.fi/schema/warsa/prisoners/amount_children>': { name: 'NUM_CHILDREN' },
         };
 
         // The SPARQL endpoint URL
@@ -56,6 +58,7 @@
             '?name',
             '?occupation',
             '?rank',
+            '?unit',
             '?marital_status',
             '?children',
             '?explanation',
@@ -63,6 +66,7 @@
             '?birth_date',
             '?time_captured',
             '?death_date',
+            '?returned_date',
 //            '?cause_of_death',
         ];
 
@@ -85,6 +89,7 @@
         '  OPTIONAL { ?id skos:prefLabel ?name . }' +
         '  OPTIONAL { ?id pow:occupation ?occupation . }' +
         '  OPTIONAL { ?id pow:rank ?rank . }' +
+        '  OPTIONAL { ?id pow:unit ?unit . }' +
         '  OPTIONAL { ?id pow:amount_children ?children . }' +
         '  OPTIONAL { ?id pow:marital_status ?marital_status . }' +
         '  OPTIONAL { ?id pow:explanation ?explanation . }' +
@@ -92,6 +97,7 @@
         '  OPTIONAL { ?id pow:birth_date ?birth_date . }' +
         '  OPTIONAL { ?id pow:time_captured ?time_captured . }' +
         '  OPTIONAL { ?id pow:death_date ?death_date . }' +
+        '  OPTIONAL { ?id pow:returned_date ?returned_date . }' +
 //        '  OPTIONAL { ?id pow:cause_of_death ?cause_of_death . }' +
         ' }';
 
@@ -119,7 +125,8 @@
 
         function getFacets() {
             // Translate the facet headers.
-            return $translate(['NAME', 'OCCUPATION', 'CAUSE_OF_DEATH', 'NUM_CHILDREN', 'MARITAL_STATUS', 'RANK'])
+            return $translate(['NAME', 'OCCUPATION', 'CAUSE_OF_DEATH', 'NUM_CHILDREN', 'MARITAL_STATUS', 'RANK',
+                               'UNIT', 'NUM_CHILDREN'])
             .then(function(translations) {
                 var facetsCopy = angular.copy(facets);
                 _.forOwn(facetsCopy, function(val) {

@@ -42,12 +42,12 @@
             // (A list because then we can always assume that if there is a value for unit,
             // it will be a list.)
             // Possible additional units will be appended to the list when result objects are merged.
-            if (o.unit) {
-                o.unit = [{
-                    id: o.unit_uri,
-                    label: o.unit
-                }];
-            }
+//            if (o.unit) {
+//                o.unit = [{
+//                    id: o.unit_uri,
+//                    label: o.unit
+//                }];
+//            }
 
             // Same for municipality of death (except we expect a single municipality,
             // so no list - in case there are multiple for some reason, a list will be

@@ -11,26 +11,27 @@
   <colgroup>
     <col width="10%" />
     <col width="4%" />
-    <col width="20%" />
     <col width="6%" />
+    <col width="15%" />
   </colgroup>
   <tr ng-show="!vm.isLoadingResults" ng-repeat="person in $data">
     <td data-title="'NAME' | translate">
-      {{::person.name}}
+      <a href="#" ng-if="::person.name">{{::person.name}}</a>
     </td>
     <td data-title="'RANK' | translate">
-      <a ws-page-link ng-if="::person.rank" ng-href="/ranks/page?uri={{::person.rank_uri}}">
-        {{::person.rank}}
-      </a>
+      <a href="#" ng-if="::person.rank">{{::person.rank}}</a>
+    </td>
+    <td data-title="'UNIT' | translate">
+      <a href="#" ng-if="::person.unit">{{::person.unit}}</a>
     </td>
     <td data-title="'PLACE_CAPTURED' | translate">
-      {{::person.place_captured}}
+      <a href="#" ng-if="::person.place_captured">{{::person.place_captured}}</a>
     </td>
     <td data-title="'MARITAL_STATUS' | translate">
       {{::person.marital_status}}
     </td>
     <td data-title="'OCCUPATION' | translate">
-      {{::person.occupation}}
+      <a href="#" ng-if="::person.occupation">{{::person.occupation}}</a>
     </td>
     <td data-title="'NUM_CHILDREN' | translate">
       {{::person.children}}
@@ -39,13 +40,16 @@
       {{::person.explanation}}
     </td>
     <td data-title="'BIRTH_DATE' | translate">
-      {{::person.birth_date}}
+      <a href="#" ng-if="::person.birth_date">{{::person.birth_date}}</a>
     </td>
     <td data-title="'TIME_CAPTURED' | translate">
-      {{::person.time_captured}}
+      <a href="#" ng-if="::person.time_captured">{{::person.time_captured}}</a>
+    </td>
+    <td data-title="'RETURNED_DATE' | translate">
+      <a href="#" ng-if="::person.returned_date">{{::person.returned_date}}</a>
     </td>
     <td data-title="'DEATH_DATE' | translate">
-      {{::person.death_date}}
+      <a href="#" ng-if="::person.death_date">{{::person.death_date}}</a>
     </td>
     <!--<td data-title="'CAUSE_OF_DEATH' | translate">-->
       <!--{{::person.cause_of_death}}-->
