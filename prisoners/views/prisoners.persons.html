@@ -1,69 +1,30 @@
 <div>
-    <div id="my-thumbs-list">
-        <img src="images/menehtyneet.jpg" style="height: 95px; repeat: " alt="Menehtyneet"/>
-    </div>
+    <!--<div id="my-thumbs-list">-->
+        <!--<img src="images/menehtyneet.jpg" style="height: 95px; repeat: " alt="Menehtyneet"/>-->
+    <!--</div>-->
     <h1 translate>APP_TITLE</h1>
     <p translate>HELP_TEXT</p>
 
 </div>
 
-<table class="table casualty-table ng-table-reponsive" ng-table="vm.tableParams">
+<table class="table casualty-table ng-table-responsive" ng-table="vm.tableParams">
   <colgroup>
-    <col width="17%" />
-    <col width="5%" />
-    <col width="12%" />
-    <col width="5%" />
-    <col width="12%" />
-    <col width="5%" />
-    <col width="5%" />
-    <col width="5%" />
-    <col width="7%" />
     <col width="10%" />
+    <col width="4%" />
+    <col width="20%" />
     <col width="6%" />
-    <col width="6%" />
-    <col width="5%" />
   </colgroup>
   <tr ng-show="!vm.isLoadingResults" ng-repeat="person in $data">
     <td data-title="'NAME' | translate">
-      <a ws-page-link ng-if="::person.warsa_person" ng-href="/persons/page?uri={{::person.warsa_person}}">
-        {{::person.name}}
-      </a>
-      <span ng-if="::!person.warsa_person">{{::person.name}}</span>
+      {{::person.name}}
     </td>
     <td data-title="'RANK' | translate">
       <a ws-page-link ng-if="::person.rank" ng-href="/ranks/page?uri={{::person.rank_uri}}">
         {{::person.rank}}
       </a>
     </td>
-    <td data-title="'UNIT' | translate">
-      <span ng-if="::person.unit" ng-repeat="unit in ::person.unit">
-        <a ws-page-link ng-href="/units/page?uri={{::unit.id}}">{{::unit.label}}</a>{{$last ? '' : ', '}}
-      </span>
-      <span ng-if="::!person.unit">
-        {{::person.unit_str}}
-      </span>
-    </td>
-    <td data-title="'TIME_OF_DEATH' | translate">
-      <a ws-page-link ng-if="::person.tod" ng-href="/times/page?uri=http://ldf.fi/warsa/events/times/time_{{::person.tod}}-{{::person.tod}}">
-        {{::person.tod | date:'dd.MM.yyyy'}}
-      </a>
-    </td>
-    <td data-title="'PERISHING_CLASS' | translate">
-      {{::person.casualty_class}}
-    </td>
-    <td data-title="'DEATH_MUNICIPALITY' | translate">
-        <a ng-if="::!person.kuolinkunta_narc" ws-page-link
-            ng-href="/places/page?oldMap=true&uri={{::person.death_municipality.id}}">
-          {{::person.death_municipality.label}}
-        </a>
-        <span ng-if="::person.kuolinkunta_narc">{{::person.death_municipality.label}}</span>
-    </td>
-    <td data-title="'PLACE_OF_DEATH' | translate">
-      {{::person.death_place}}
-    </td>
-
-    <td data-title="'GENDER' | translate">
-      {{::person.gender}}
+    <td data-title="'PLACE_CAPTURED' | translate">
+      {{::person.place_captured}}
     </td>
     <td data-title="'MARITAL_STATUS' | translate">
       {{::person.marital_status}}
@@ -71,15 +32,24 @@
     <td data-title="'OCCUPATION' | translate">
       {{::person.occupation}}
     </td>
-    <td data-title="'MOTHER_TONGUE' | translate">
-      {{::person.language}}
-    </td>
-    <td data-title="'NATIONALITY' | translate">
-      {{::person.nationality}}
-    </td>
     <td data-title="'NUM_CHILDREN' | translate">
       {{::person.children}}
     </td>
+    <td data-title="'EXPLANATION' | translate">
+      {{::person.explanation}}
+    </td>
+    <td data-title="'BIRTH_DATE' | translate">
+      {{::person.birth_date}}
+    </td>
+    <td data-title="'TIME_CAPTURED' | translate">
+      {{::person.time_captured}}
+    </td>
+    <td data-title="'DEATH_DATE' | translate">
+      {{::person.death_date}}
+    </td>
+    <!--<td data-title="'CAUSE_OF_DEATH' | translate">-->
+      <!--{{::person.cause_of_death}}-->
+    <!--</td>-->
   </tr>
 </table>
 <img class="loading-img" src="images/loading-lg.gif" ng-if="vm.isLoadingResults"></img>
