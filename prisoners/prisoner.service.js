@@ -34,18 +34,10 @@
                 type: 'text',
                 enabled: true
             },
-            '<http://ldf.fi/schema/warsa/prisoners/occupation>': {
-                name: 'OCCUPATION',
-                service: '<http://ldf.fi/pnr/sparql>'
-            },
-            '<http://ldf.fi/schema/warsa/prisoners/marital_status>': {
-                name: 'MARITAL_STATUS',
-                service: '<http://ldf.fi/pnr/sparql>'
-            },
             // Basic facets
-//            '<http://ldf.fi/schema/warsa/prisoners/occupation>': { name: 'OCCUPATION' },
+            '<http://ldf.fi/schema/warsa/prisoners/occupation>': { name: 'OCCUPATION' },
 //            '<http://ldf.fi/schema/warsa/prisoners/cause_of_death>': { name: 'CAUSE_OF_DEATH' },
-//            '<http://ldf.fi/schema/warsa/prisoners/marital_status>': { name: 'MARITAL_STATUS' }
+            '<http://ldf.fi/schema/warsa/prisoners/marital_status>': { name: 'MARITAL_STATUS' }
         };
 
         // The SPARQL endpoint URL
