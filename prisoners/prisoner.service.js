@@ -35,7 +35,7 @@
                 enabled: true
             },
             // Basic facets
-            '<http://ldf.fi/schema/warsa/prisoners/occupation>': { name: 'OCCUPATION' },
+            '<http://ldf.fi/schema/bioc/has_occupation>': { name: 'OCCUPATION' },
 //            '<http://ldf.fi/schema/warsa/prisoners/cause_of_death>': { name: 'CAUSE_OF_DEATH' },
             '<http://ldf.fi/schema/warsa/prisoners/marital_status>': { name: 'MARITAL_STATUS' },
             '<http://ldf.fi/schema/warsa/prisoners/unit>': { name: 'UNIT', enabled: true },
@@ -44,6 +44,7 @@
 
         // The SPARQL endpoint URL
         var endpointUrl = 'http://ldf.fi/warsa/sparql';
+//        var endpointUrl = 'http://localhost:3030/warsa/sparql';
 
         var facetOptions = {
             endpointUrl: endpointUrl,
@@ -77,6 +78,7 @@
         ' PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>' +
         ' PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>' +
         ' PREFIX text: <http://jena.apache.org/text#>' +
+        ' PREFIX bioc: <http://ldf.fi/schema/bioc/>' +
         ' PREFIX pow: <http://ldf.fi/schema/warsa/prisoners/>';
 
         // The query for the results.
@@ -87,7 +89,7 @@
         '    <RESULT_SET> ' +
         '  } ' +
         '  OPTIONAL { ?id skos:prefLabel ?name . }' +
-        '  OPTIONAL { ?id pow:occupation ?occupation . }' +
+        '  OPTIONAL { ?id bioc:has_occupation ?occupation . }' +
         '  OPTIONAL { ?id pow:rank ?rank . }' +
         '  OPTIONAL { ?id pow:unit ?unit . }' +
         '  OPTIONAL { ?id pow:amount_children ?children . }' +
