@@ -35,11 +35,21 @@
                 enabled: true
             },
             // Basic facets
-            '<http://ldf.fi/schema/bioc/has_occupation>': { name: 'OCCUPATION' },
 //            '<http://ldf.fi/schema/warsa/prisoners/cause_of_death>': { name: 'CAUSE_OF_DEATH' },
-            '<http://ldf.fi/schema/warsa/prisoners/marital_status>': { name: 'MARITAL_STATUS' },
             '<http://ldf.fi/schema/warsa/prisoners/unit>': { name: 'UNIT', enabled: true },
+            '<http://ldf.fi/schema/warsa/prisoners/marital_status>': { name: 'MARITAL_STATUS' },
+            '<http://ldf.fi/schema/bioc/has_occupation>': { name: 'OCCUPATION' },
             '<http://ldf.fi/schema/warsa/prisoners/amount_children>': { name: 'NUM_CHILDREN' },
+            '<http://ldf.fi/schema/warsa/prisoners/birth_place>': { name: 'BIRTH_MUNICIPALITY' },
+            timeCaptured: {
+                name: 'TIME_CAPTURED',
+                facetId: 'timeCaptured',
+                predicate: '<http://ldf.fi/time_captured>',
+                start: '<http://ldf.fi/schema/warsa/prisoners/time_captured>',
+                end: '<http://ldf.fi/schema/warsa/prisoners/time_captured>',
+                min: '1939-10-01',
+                max: '1945-12-31',
+            },
         };
 
         // The SPARQL endpoint URL
@@ -65,6 +75,7 @@
             '?explanation',
             '?place_captured',
             '?birth_date',
+            '?birth_place',
             '?time_captured',
             '?death_date',
             '?returned_date',
@@ -97,6 +108,7 @@
         '  OPTIONAL { ?id pow:explanation ?explanation . }' +
         '  OPTIONAL { ?id pow:place_captured ?place_captured . }' +
         '  OPTIONAL { ?id pow:birth_date ?birth_date . }' +
+        '  OPTIONAL { ?id pow:birth_place ?birth_place . }' +
         '  OPTIONAL { ?id pow:time_captured ?time_captured . }' +
         '  OPTIONAL { ?id pow:death_date ?death_date . }' +
         '  OPTIONAL { ?id pow:returned_date ?returned_date . }' +
@@ -128,7 +140,7 @@
         function getFacets() {
             // Translate the facet headers.
             return $translate(['NAME', 'OCCUPATION', 'CAUSE_OF_DEATH', 'NUM_CHILDREN', 'MARITAL_STATUS', 'RANK',
-                               'UNIT', 'NUM_CHILDREN'])
+                               'UNIT', 'NUM_CHILDREN', 'BIRTH_MUNICIPALITY', 'TIME_CAPTURED'])
             .then(function(translations) {
                 var facetsCopy = angular.copy(facets);
                 _.forOwn(facetsCopy, function(val) {
