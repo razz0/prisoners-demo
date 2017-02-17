@@ -8,10 +8,10 @@
     /*
      * prisoner service
      */
-    .service( 'prisonerService', prisonerService );
+    .service( 'prisonerService', prisonerService);
 
     /* @ngInject */
-    function prisonerService( $q, $translate, _, FacetResultHandler, personMapperService ) {
+    function prisonerService( $translate, _, FacetResultHandler, personMapperService ) {
 
         /* Public API */
 
@@ -29,42 +29,47 @@
 
         var facets = {
             // Text search facet for name
-            '<http://www.w3.org/2004/02/skos/core#prefLabel>': {
+            name: {
+                facetId: 'name',
+                predicate: '<http://www.w3.org/2004/02/skos/core#prefLabel>',
                 name: 'NAME',
-                type: 'text',
                 enabled: true
             },
-            // Basic facets
-//            '<http://ldf.fi/schema/warsa/prisoners/cause_of_death>': { name: 'CAUSE_OF_DEATH' },
-            '<http://ldf.fi/schema/warsa/prisoners/unit>': { name: 'UNIT', enabled: true },
-            '<http://ldf.fi/schema/warsa/prisoners/marital_status>': { name: 'MARITAL_STATUS' },
-            '<http://ldf.fi/schema/bioc/has_occupation>': { name: 'OCCUPATION' },
-            '<http://ldf.fi/schema/warsa/prisoners/amount_children>': { name: 'NUM_CHILDREN' },
-            '<http://ldf.fi/schema/warsa/prisoners/birth_place>': { name: 'BIRTH_MUNICIPALITY' },
+
             timeCaptured: {
-                name: 'TIME_CAPTURED',
                 facetId: 'timeCaptured',
                 predicate: '<http://ldf.fi/time_captured>',
-                start: '<http://ldf.fi/schema/warsa/prisoners/time_captured>',
-                end: '<http://ldf.fi/schema/warsa/prisoners/time_captured>',
+                name: 'TIME_CAPTURED',
+                startPredicate: '<http://ldf.fi/schema/warsa/prisoners/time_captured>',
+                endPredicate: '<http://ldf.fi/schema/warsa/prisoners/time_captured>',
                 min: '1939-10-01',
-                max: '1945-12-31',
+                max: '1989-12-31',
+                enabled: true
             },
+
+            // Basic facets
+//            '<http://ldf.fi/schema/warsa/prisoners/cause_of_death>': { name: 'CAUSE_OF_DEATH' },
+            // '<http://ldf.fi/schema/warsa/prisoners/marital_status>': { name: 'MARITAL_STATUS' },
+            // '<http://ldf.fi/schema/warsa/prisoners/birth_place>': { name: 'BIRTH_MUNICIPALITY' },
+            unit: {
+              facetId: 'unit',
+              predicate: '<http://ldf.fi/schema/warsa/prisoners/unit>',
+              name: 'UNIT'
+            },
+            occupation: {
+              facetId: 'occupation',
+              predicate: '<http://ldf.fi/schema/bioc/has_occupation>',
+              name: 'OCCUPATION'
+            },
+            numChildren: {
+              facetId: 'numChildren',
+              predicate: '<http://ldf.fi/schema/warsa/prisoners/amount_children>',
+              name: 'NUM_CHILDREN'
+            },
+
         };
 
         // The SPARQL endpoint URL
-        var endpointUrl = 'http://ldf.fi/warsa/sparql';
-//        var endpointUrl = 'http://localhost:3030/warsa/sparql';
-
-        var facetOptions = {
-            endpointUrl: endpointUrl,
-            rdfClass: '<http://ldf.fi/schema/warsa/prisoners/PrisonerOfWar>',
-            // Include the label (name) as a constraint so that we can use it for sorting.
-            // Have to use ?s here as the subject variable.
-            constraint: '?s skos:prefLabel ?name .',
-            preferredLang : 'fi'
-        };
-
         var properties = [
             '?name',
             '?occupation',
@@ -101,21 +106,33 @@
         '  } ' +
         '  OPTIONAL { ?id skos:prefLabel ?name . }' +
         '  OPTIONAL { ?id bioc:has_occupation ?occupation . }' +
-        '  OPTIONAL { ?id pow:rank ?rank . }' +
+        // '  OPTIONAL { ?id pow:rank ?rank . }' +
         '  OPTIONAL { ?id pow:unit ?unit . }' +
         '  OPTIONAL { ?id pow:amount_children ?children . }' +
-        '  OPTIONAL { ?id pow:marital_status ?marital_status . }' +
-        '  OPTIONAL { ?id pow:explanation ?explanation . }' +
-        '  OPTIONAL { ?id pow:place_captured ?place_captured . }' +
-        '  OPTIONAL { ?id pow:birth_date ?birth_date . }' +
-        '  OPTIONAL { ?id pow:birth_place ?birth_place . }' +
-        '  OPTIONAL { ?id pow:time_captured ?time_captured . }' +
-        '  OPTIONAL { ?id pow:death_date ?death_date . }' +
-        '  OPTIONAL { ?id pow:returned_date ?returned_date . }' +
+        // '  OPTIONAL { ?id pow:marital_status ?marital_status . }' +
+        // '  OPTIONAL { ?id pow:explanation ?explanation . }' +
+        // '  OPTIONAL { ?id pow:place_captured ?place_captured . }' +
+        // '  OPTIONAL { ?id pow:birth_date ?birth_date . }' +
+        // '  OPTIONAL { ?id pow:birth_place ?birth_place . }' +
+        // '  OPTIONAL { ?id pow:time_captured ?time_captured . }' +
+        // '  OPTIONAL { ?id pow:death_date ?death_date . }' +
+        // '  OPTIONAL { ?id pow:returned_date ?returned_date . }' +
 //        '  OPTIONAL { ?id pow:cause_of_death ?cause_of_death . }' +
         ' }';
 
         query = query.replace(/<PROPERTIES>/g, properties.join(' '));
+
+        var endpointUrl = 'http://ldf.fi/warsa/sparql';
+//        var endpointUrl = 'http://localhost:3030/warsa/sparql';
+
+        var facetOptions = {
+            endpointUrl: endpointUrl,
+            rdfClass: '<http://ldf.fi/schema/warsa/prisoners/PrisonerOfWar>',
+            // Include the label (name) as a constraint so that we can use it for sorting.
+            // Have to use ?s here as the subject variable.
+            constraint: '?id skos:prefLabel ?name .',
+            preferredLang : 'fi'
+        };
 
         var resultOptions = {
             queryTemplate: query,
@@ -126,8 +143,7 @@
 
         // The FacetResultHandler handles forming the final queries for results,
         // querying the endpoint, and mapping the results to objects.
-        var resultHandler = new FacetResultHandler(endpointUrl, facets, facetOptions,
-                resultOptions);
+        var resultHandler = new FacetResultHandler(endpointUrl, resultOptions);
 
         function getResults(facetSelections) {
             // Get the results sorted by ?name.
@@ -139,8 +155,7 @@
 
         function getFacets() {
             // Translate the facet headers.
-            return $translate(['NAME', 'OCCUPATION', 'CAUSE_OF_DEATH', 'NUM_CHILDREN', 'MARITAL_STATUS', 'RANK',
-                               'UNIT', 'NUM_CHILDREN', 'BIRTH_MUNICIPALITY', 'TIME_CAPTURED'])
+            return $translate(_.map(facets, 'name'))
             .then(function(translations) {
                 var facetsCopy = angular.copy(facets);
                 _.forOwn(facetsCopy, function(val) {

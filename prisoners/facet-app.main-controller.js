@@ -13,19 +13,21 @@
     /*
     * Controller for the results view.
     */
-    .controller( 'MainController', function ( _, RESULTS_PER_PAGE,
-                prisonerService, NgTableParams, facetUrlStateHandlerService ) {
+    .controller( 'MainController', function ($scope, _, RESULTS_PER_PAGE,
+                prisonerService, NgTableParams, FacetHandler, facetUrlStateHandlerService ) {
         var vm = this;
-        vm.facetOptions = getFacetOptions();
+        var initListener = $scope.$on('sf-initial-constraints', function(event, config) {
+            updateResults(event, config);
+            initListener();
+        });
+        $scope.$on('sf-facet-constraints', updateResults);
+
         prisonerService.getFacets().then(function(facets) {
             vm.facets = facets;
+            vm.facetOptions = getFacetOptions();
+            vm.facetOptions.scope = $scope;
+            vm.handler = new FacetHandler(vm.facetOptions);
         });
-
-        vm.disableFacets = disableFacets;
-
-        function disableFacets() {
-            return vm.isLoadingResults;
-        }
 
         function initializeTable() {
             vm.tableParams = new NgTableParams(
@@ -40,8 +42,7 @@
 
         function getFacetOptions() {
             var options = prisonerService.getFacetOptions();
-            options.updateResults = updateResults;
-            options.initialValues = facetUrlStateHandlerService.getFacetValuesFromUrlParams();
+            options.initialState = facetUrlStateHandlerService.getFacetValuesFromUrlParams();
             return options;
         }
 
@@ -59,7 +60,7 @@
             });
         }
 
-        function updateResults( facetSelections ) {
+        function updateResults(event, facetSelections) {
             facetUrlStateHandlerService.updateUrlParams(facetSelections);
             vm.isLoadingResults = true;
 
