@@ -50,7 +50,11 @@
             // Basic facets
 //            '<http://ldf.fi/schema/warsa/prisoners/cause_of_death>': { name: 'CAUSE_OF_DEATH' },
             // '<http://ldf.fi/schema/warsa/prisoners/marital_status>': { name: 'MARITAL_STATUS' },
-            // '<http://ldf.fi/schema/warsa/prisoners/birth_place>': { name: 'BIRTH_MUNICIPALITY' },
+            rank: {
+              facetId: 'rank',
+              predicate: '<http://ldf.fi/schema/warsa/prisoners/rank>',
+              name: 'RANK'
+            },
             unit: {
               facetId: 'unit',
               predicate: '<http://ldf.fi/schema/warsa/prisoners/unit>',
@@ -61,15 +65,23 @@
               predicate: '<http://ldf.fi/schema/bioc/has_occupation>',
               name: 'OCCUPATION'
             },
+            maritalStatus: {
+              facetId: 'maritalStatus',
+              predicate: '<http://ldf.fi/schema/warsa/prisoners/marital_status>',
+              name: 'MARITAL_STATUS'
+            },
             numChildren: {
               facetId: 'numChildren',
               predicate: '<http://ldf.fi/schema/warsa/prisoners/amount_children>',
               name: 'NUM_CHILDREN'
             },
-
+            birthPlace: {
+              facetId: 'birthPlace',
+              predicate: '<http://ldf.fi/schema/warsa/prisoners/birth_place>',
+              name: 'BIRTH_MUNICIPALITY'
+            }
         };
 
-        // The SPARQL endpoint URL
         var properties = [
             '?name',
             '?occupation',
@@ -106,24 +118,24 @@
         '  } ' +
         '  OPTIONAL { ?id skos:prefLabel ?name . }' +
         '  OPTIONAL { ?id bioc:has_occupation ?occupation . }' +
-        // '  OPTIONAL { ?id pow:rank ?rank . }' +
+        '  OPTIONAL { ?id pow:rank ?rank . }' +
         '  OPTIONAL { ?id pow:unit ?unit . }' +
         '  OPTIONAL { ?id pow:amount_children ?children . }' +
-        // '  OPTIONAL { ?id pow:marital_status ?marital_status . }' +
-        // '  OPTIONAL { ?id pow:explanation ?explanation . }' +
-        // '  OPTIONAL { ?id pow:place_captured ?place_captured . }' +
-        // '  OPTIONAL { ?id pow:birth_date ?birth_date . }' +
-        // '  OPTIONAL { ?id pow:birth_place ?birth_place . }' +
-        // '  OPTIONAL { ?id pow:time_captured ?time_captured . }' +
-        // '  OPTIONAL { ?id pow:death_date ?death_date . }' +
-        // '  OPTIONAL { ?id pow:returned_date ?returned_date . }' +
+        '  OPTIONAL { ?id pow:marital_status ?marital_status . }' +
+        '  OPTIONAL { ?id pow:explanation ?explanation . }' +
+        '  OPTIONAL { ?id pow:place_captured ?place_captured . }' +
+        '  OPTIONAL { ?id pow:birth_date ?birth_date . }' +
+        '  OPTIONAL { ?id pow:birth_place ?birth_place . }' +
+        '  OPTIONAL { ?id pow:time_captured ?time_captured . }' +
+        '  OPTIONAL { ?id pow:death_date ?death_date . }' +
+        '  OPTIONAL { ?id pow:returned_date ?returned_date . }' +
 //        '  OPTIONAL { ?id pow:cause_of_death ?cause_of_death . }' +
         ' }';
 
         query = query.replace(/<PROPERTIES>/g, properties.join(' '));
 
-        var endpointUrl = 'http://ldf.fi/warsa/sparql';
-//        var endpointUrl = 'http://localhost:3030/warsa/sparql';
+//        var endpointUrl = 'http://ldf.fi/warsa/sparql';
+        var endpointUrl = 'http://localhost:3030/warsa/sparql';
 
         var facetOptions = {
             endpointUrl: endpointUrl,
