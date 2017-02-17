@@ -5,6 +5,7 @@
     "NAME": "Name",
     "RANK": "Rank",
     "UNIT": "Military Unit",
+    "CAMPS": "Camps",
     "TIME_OF_DEATH": "Time of Death",
     "PERISHING_CLASS": "Perishing Class",
     "BIRTH_MUNICIPALITY": "Birth Municipality",

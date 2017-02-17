@@ -60,6 +60,11 @@
               predicate: '<http://ldf.fi/schema/warsa/prisoners/unit>',
               name: 'UNIT'
             },
+            camps: {
+              facetId: 'camps',
+              predicate: '<http://ldf.fi/schema/warsa/prisoners/camps_and_hospitals>',
+              name: 'CAMPS'
+            },
             occupation: {
               facetId: 'occupation',
               predicate: '<http://ldf.fi/schema/bioc/has_occupation>',
@@ -96,6 +101,7 @@
             '?time_captured',
             '?death_date',
             '?returned_date',
+            '?camps',
 //            '?cause_of_death',
         ];
 
@@ -129,6 +135,7 @@
         '  OPTIONAL { ?id pow:time_captured ?time_captured . }' +
         '  OPTIONAL { ?id pow:death_date ?death_date . }' +
         '  OPTIONAL { ?id pow:returned_date ?returned_date . }' +
+        '  OPTIONAL { ?id pow:camps_and_hospitals ?camps . }' +
 //        '  OPTIONAL { ?id pow:cause_of_death ?cause_of_death . }' +
         ' }';
 
