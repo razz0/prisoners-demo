@@ -18,13 +18,13 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "^3.3.6",
+    "bootstrap": "^3.3.7",
     "ng-table": "^0.8.3",
-    "angular": "^1.5.8",
+    "angular": "^1.6.1",
     "angular-translate": "^2.14.0",
     "angular-translate-loader-static-files": "^2.10.0",
-    "angular-ui-router": "^1.0.0-alpha.0",
-    "sparql-faceter": "^1.4.1"
+    "angular-ui-router": "^1.0.0-rc.1",
+    "sparql-faceter": "#master"
   },
   "resolutions": {
     "angular": ">=1.4.0"
