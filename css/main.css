@@ -71,8 +71,8 @@ img#personthumbnail {
     background-position: top;
 }
 
-.persbox#nav-casualties {
-    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('/images/nav/casualties.png');
+.persbox#nav-prisoners {
+    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('/images/nav/prisoners.png');
 }
 
 .persbox#nav-articles {
