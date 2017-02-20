@@ -31,7 +31,9 @@
       {{::person.marital_status}}
     </td>
     <td data-title="'OCCUPATION' | translate">
-      <a href="#" ng-if="::person.occupation">{{::person.occupation}}</a>
+      <span ng-if="::person.occupation" ng-repeat="occupation in ::person.occupation">
+        <a href="#">{{::occupation}}</a>{{$last ? '' : ', '}}
+      </span>
     </td>
     <td data-title="'NUM_CHILDREN' | translate">
       {{::person.children}}
@@ -43,7 +45,9 @@
       <a href="#" ng-if="::person.birth_date">{{::person.birth_date}}</a>
     </td>
     <td data-title="'TIME_CAPTURED' | translate">
-      <a href="#" ng-if="::person.time_captured">{{::person.time_captured}}</a>
+      <span ng-if="::person.time_captured" ng-repeat="time in ::person.time_captured">
+        <a href="#">{{::time}}</a>{{$last ? '' : ', '}}
+      </span>
     </td>
     <td data-title="'RETURNED_DATE' | translate">
       <a href="#" ng-if="::person.returned_date">{{::person.returned_date}}</a>
@@ -52,7 +56,9 @@
       <a href="#" ng-if="::person.death_date">{{::person.death_date}}</a>
     </td>
     <td data-title="'CAMPS' | translate">
-      <a href="#" ng-if="::person.camps">{{::person.camps}}</a>
+      <span ng-if="::person.camps" ng-repeat="camp in ::person.camps">
+        <a href="#">{{::camp}}</a>{{$last ? '' : ', '}}
+      </span>
     </td>
     <!--<td data-title="'Muokkaa' | translate">-->
       <!--<a href="#">O</a>-->

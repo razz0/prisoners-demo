@@ -15,7 +15,9 @@
     */
     .controller( 'MainController', function ($scope, _, RESULTS_PER_PAGE,
                 prisonerService, NgTableParams, FacetHandler, facetUrlStateHandlerService ) {
+
         var vm = this;
+
         var initListener = $scope.$on('sf-initial-constraints', function(event, config) {
             updateResults(event, config);
             initListener();
