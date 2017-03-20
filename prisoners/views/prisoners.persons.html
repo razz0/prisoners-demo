@@ -42,18 +42,30 @@
       {{::person.explanation}}
     </td>
     <td data-title="'BIRTH_DATE' | translate">
-      <a href="#" ng-if="::person.birth_date">{{::person.birth_date}}</a>
+      <span ng-if="::person.birth_date" ng-repeat="time in ::person.birth_date">
+        <a ws-page-link ng-if="::person.birth_date" ng-href="/times/page?uri=http://ldf.fi/warsa/events/times/time_{{::time}}-{{::time}}">
+          {{::time | date:'dd.MM.yyyy'}}
+        </a>
+      </span>
     </td>
     <td data-title="'TIME_CAPTURED' | translate">
       <span ng-if="::person.time_captured" ng-repeat="time in ::person.time_captured">
-        <a href="#">{{::time}}</a>{{$last ? '' : ', '}}
+        <a ws-page-link ng-href="/times/page?uri=http://ldf.fi/warsa/events/times/time_{{::time}}-{{::time}}">
+          {{::time | date:'dd.MM.yyyy'}}
+        </a>
       </span>
     </td>
     <td data-title="'RETURNED_DATE' | translate">
-      <a href="#" ng-if="::person.returned_date">{{::person.returned_date}}</a>
+      <a ws-page-link ng-href="/times/page?uri=http://ldf.fi/warsa/events/times/time_{{::person.returned_date}}-{{::person.returned_date}}">
+        {{::person.returned_date | date:'dd.MM.yyyy'}}
+      </a>
     </td>
     <td data-title="'DEATH_DATE' | translate">
-      <a href="#" ng-if="::person.death_date">{{::person.death_date}}</a>
+      <span ng-if="::person.death_date" ng-repeat="time in ::person.death_date">
+        <a ws-page-link ng-href="/times/page?uri=http://ldf.fi/warsa/events/times/time_{{::time}}-{{::time}}">
+          {{::time | date:'dd.MM.yyyy'}}
+        </a>
+      </span>
     </td>
     <td data-title="'CAMPS' | translate">
       <span ng-if="::person.camps" ng-repeat="camp in ::person.camps">
