@@ -19,7 +19,9 @@
       <a href="#" ng-if="::person.name">{{::person.name}}</a>
     </td>
     <td data-title="'RANK' | translate">
-      <a href="#" ng-if="::person.rank">{{::person.rank}}</a>
+      <span ng-if="::person.rank" ng-repeat="rank in ::person.rank">
+        <a href="#" ng-if="::rank">{{::rank}}</a>
+      </span>
     </td>
     <td data-title="'UNIT' | translate">
       <a href="#" ng-if="::person.unit">{{::person.unit}}</a>

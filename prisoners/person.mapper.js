@@ -16,7 +16,7 @@
     /* ngInject */
     function personMapperService(_, objectMapperService) {
 
-        var multipleValueField = ['camps', 'time_captured', 'death_date', 'birth_date', 'occupation'];
+        var multipleValueField = ['camps', 'time_captured', 'death_date', 'birth_date', 'occupation', 'rank'];
 
         PersonMapper.prototype.postProcess = postProcess;
 
