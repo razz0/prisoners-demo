@@ -47,6 +47,17 @@
                 enabled: true
             },
 
+            deathDate: {
+                facetId: 'deathDate',
+                predicate: '<http://ldf.fi/death_date>',
+                name: 'DEATH_DATE',
+                startPredicate: '<http://ldf.fi/schema/warsa/prisoners/death_date>',
+                endPredicate: '<http://ldf.fi/schema/warsa/prisoners/death_date>',
+                min: '1939-10-01',
+                max: '1989-12-31',
+                enabled: true
+            },
+
             // Basic facets
 //            '<http://ldf.fi/schema/warsa/prisoners/cause_of_death>': { name: 'CAUSE_OF_DEATH' },
             // '<http://ldf.fi/schema/warsa/prisoners/marital_status>': { name: 'MARITAL_STATUS' },
