@@ -43,7 +43,7 @@
                 startPredicate: '<http://ldf.fi/schema/warsa/prisoners/time_captured>',
                 endPredicate: '<http://ldf.fi/schema/warsa/prisoners/time_captured>',
                 min: '1939-10-01',
-                max: '1989-12-31',
+                max: '1977-07-27',
                 enabled: true
             },
 
@@ -54,7 +54,7 @@
                 startPredicate: '<http://ldf.fi/schema/warsa/prisoners/death_date>',
                 endPredicate: '<http://ldf.fi/schema/warsa/prisoners/death_date>',
                 min: '1939-10-01',
-                max: '1989-12-31',
+//                max: '1989-12-31',
                 enabled: true
             },
 
