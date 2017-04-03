@@ -8,15 +8,22 @@
 </div>
 
 <table class="table casualty-table ng-table-responsive" ng-table="vm.tableParams">
-  <colgroup>
-    <col width="10%" />
-    <col width="4%" />
-    <col width="6%" />
-    <col width="15%" />
-  </colgroup>
+  <!--<colgroup>-->
+    <!--<col width="15%" />-->
+    <!--<col width="4%" />-->
+    <!--<col width="8%" />-->
+    <!--<col width="10%" />-->
+  <!--</colgroup>-->
   <tr ng-show="!vm.isLoadingResults" ng-repeat="person in $data">
     <td data-title="'NAME' | translate">
       <a href="#" ng-if="::person.name">{{::person.name}}</a>
+    </td>
+    <td data-title="'BIRTH_DATE' | translate">
+      <span ng-if="::person.birth_date" ng-repeat="time in ::person.birth_date">
+        <a ws-page-link ng-if="::person.birth_date" ng-href="/times/page?uri=http://ldf.fi/warsa/events/times/time_{{::time}}-{{::time}}">
+          {{::time | date:'dd.MM.yyyy'}}
+        </a>
+      </span>
     </td>
     <td data-title="'RANK' | translate">
       <span ng-if="::person.rank" ng-repeat="(rank, rank_uri) in ::person.rankz">
@@ -28,30 +35,6 @@
     <td data-title="'UNIT' | translate">
       <a href="#" ng-if="::person.unit">{{::person.unit}}</a>
     </td>
-    <td data-title="'PLACE_CAPTURED' | translate">
-      <a href="#" ng-if="::person.place_captured">{{::person.place_captured}}</a>
-    </td>
-    <td data-title="'MARITAL_STATUS' | translate">
-      {{::person.marital_status}}
-    </td>
-    <td data-title="'OCCUPATION' | translate">
-      <span ng-if="::person.occupation" ng-repeat="occupation in ::person.occupation">
-        <a href="#">{{::occupation}}</a>{{$last ? '' : ', '}}
-      </span>
-    </td>
-    <td data-title="'NUM_CHILDREN' | translate">
-      {{::person.children}}
-    </td>
-    <td data-title="'EXPLANATION' | translate">
-      {{::person.explanation}}
-    </td>
-    <td data-title="'BIRTH_DATE' | translate">
-      <span ng-if="::person.birth_date" ng-repeat="time in ::person.birth_date">
-        <a ws-page-link ng-if="::person.birth_date" ng-href="/times/page?uri=http://ldf.fi/warsa/events/times/time_{{::time}}-{{::time}}">
-          {{::time | date:'dd.MM.yyyy'}}
-        </a>
-      </span>
-    </td>
     <td data-title="'TIME_CAPTURED' | translate">
       <span ng-if="::person.time_captured" ng-repeat="time in ::person.time_captured">
         <a ws-page-link ng-href="/times/page?uri=http://ldf.fi/warsa/events/times/time_{{::time}}-{{::time}}">
@@ -59,6 +42,28 @@
         </a>
       </span>
     </td>
+    <td data-title="'CAMPS' | translate">
+      <span ng-if="::person.camps" ng-repeat="camp in ::person.camps">
+        <a href="#">{{::camp}}</a>{{$last ? '' : ', '}}
+      </span>
+    </td>
+    <!--<td data-title="'PLACE_CAPTURED' | translate">-->
+      <!--<a href="#" ng-if="::person.place_captured">{{::person.place_captured}}</a>-->
+    <!--</td>-->
+    <!--<td data-title="'MARITAL_STATUS' | translate">-->
+      <!--{{::person.marital_status}}-->
+    <!--</td>-->
+    <!--<td data-title="'OCCUPATION' | translate">-->
+      <!--<span ng-if="::person.occupation" ng-repeat="occupation in ::person.occupation">-->
+        <!--<a href="#">{{::occupation}}</a>{{$last ? '' : ', '}}-->
+      <!--</span>-->
+    <!--</td>-->
+    <!--<td data-title="'NUM_CHILDREN' | translate">-->
+      <!--{{::person.children}}-->
+    <!--</td>-->
+    <!--<td data-title="'EXPLANATION' | translate">-->
+      <!--{{::person.explanation}}-->
+    <!--</td>-->
     <td data-title="'RETURNED_DATE' | translate">
       <a ws-page-link ng-href="/times/page?uri=http://ldf.fi/warsa/events/times/time_{{::person.returned_date}}-{{::person.returned_date}}">
         {{::person.returned_date | date:'dd.MM.yyyy'}}
@@ -69,11 +74,6 @@
         <a ws-page-link ng-href="/times/page?uri=http://ldf.fi/warsa/events/times/time_{{::time}}-{{::time}}">
           {{::time | date:'dd.MM.yyyy'}}
         </a>
-      </span>
-    </td>
-    <td data-title="'CAMPS' | translate">
-      <span ng-if="::person.camps" ng-repeat="camp in ::person.camps">
-        <a href="#">{{::camp}}</a>{{$last ? '' : ', '}}
       </span>
     </td>
     <!--<td data-title="'Muokkaa' | translate">-->
