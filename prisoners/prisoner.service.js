@@ -102,6 +102,7 @@
             '?name',
             '?occupation',
             '?rank',
+            '?rank_uri',
             '?unit',
             '?marital_status',
             '?children',
@@ -135,7 +136,7 @@
         '  } ' +
         '  OPTIONAL { ?id skos:prefLabel ?name . }' +
         '  OPTIONAL { ?id bioc:has_occupation ?occupation . }' +
-        '  OPTIONAL { ?id pow:rank ?rank . }' +
+        '  OPTIONAL { ?id pow:rank ?rank_uri . ?rank_uri skos:prefLabel ?rank  . }' +
         '  OPTIONAL { ?id pow:unit ?unit . }' +
         '  OPTIONAL { ?id pow:amount_children ?children . }' +
         '  OPTIONAL { ?id pow:marital_status ?marital_status . }' +

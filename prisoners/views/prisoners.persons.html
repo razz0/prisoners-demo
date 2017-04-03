@@ -19,8 +19,10 @@
       <a href="#" ng-if="::person.name">{{::person.name}}</a>
     </td>
     <td data-title="'RANK' | translate">
-      <span ng-if="::person.rank" ng-repeat="rank in ::person.rank">
-        <a href="#" ng-if="::rank">{{::rank}}</a>
+      <span ng-if="::person.rank" ng-repeat="(rank, rank_uri) in ::person.rankz">
+        <a ws-page-link ng-href="/ranks/page?uri={{::rank_uri}}">
+          {{::rank}}
+        </a>
       </span>
     </td>
     <td data-title="'UNIT' | translate">

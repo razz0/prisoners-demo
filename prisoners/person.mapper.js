@@ -16,7 +16,7 @@
     /* ngInject */
     function personMapperService(_, objectMapperService) {
 
-        var multipleValueField = ['camps', 'time_captured', 'death_date', 'birth_date', 'occupation', 'rank'];
+        var multipleValueField = ['camps', 'time_captured', 'death_date', 'birth_date', 'occupation', 'rank', 'rank_uri'];
 
         PersonMapper.prototype.postProcess = postProcess;
 
@@ -40,8 +40,11 @@
             prisoners.forEach( function (prisoner) {
                 multipleValueField.forEach( function (field) {
                     prisoner[field] = castArray(prisoner[field]);
+                    console.log(field, prisoner[field]);
                 });
+                prisoner['rankz'] = _.zipObject(prisoner['rank'], prisoner['rank_uri']);
             });
+
             return prisoners;
         }
     }
