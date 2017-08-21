@@ -153,7 +153,7 @@
 
         query = query.replace(/<PROPERTIES>/g, properties.join(' '));
 
-        var endpointUrl = 'http://ldf.fi/warsa/sparql';
+        var endpointUrl = 'https://ldf.fi/warsa/sparql';
 //        var endpointUrl = 'http://localhost:3030/warsa/sparql';
 
         var facetOptions = {
