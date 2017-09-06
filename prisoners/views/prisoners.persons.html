@@ -6,7 +6,7 @@
 <table class="table casualty-table ng-table-responsive" ng-table="vm.tableParams">
   <tr ng-show="!vm.isLoadingResults" ng-repeat="person in $data">
     <td data-title="'NAME' | translate">
-      <a ng-href="/page?uri={{ ::person.id }}" ng-if="::person.name">{{::person.name}}</a>
+      <a ng-href="/page?uri={{ ::person.id }}" ws-page-link ng-if="::person.name">{{::person.name}}</a>
     </td>
     <td data-title="'BIRTH_DATE' | translate">
       <span ng-repeat="time in ::person.birth_date | castArray">
@@ -25,7 +25,7 @@
     </td>
     <td data-title="'UNIT' | translate">
       <span ng-switch="!!person.warsa_unit">
-        <a ng-switch-when="true" ng-href="/units/page?uri={{ ::person.warsa_unit }}">{{::person.unit}}</a>
+        <a ng-switch-when="true" ws-page-link ng-href="/units/page?uri={{ ::person.warsa_unit }}">{{::person.unit}}</a>
         <span ng-switch-when="false">{{::person.unit}}</span>
       </span>
     </td>
