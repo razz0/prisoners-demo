@@ -58,52 +58,51 @@
                 enabled: true
             },
 
-            // Basic facets
-//            '<http://ldf.fi/schema/warsa/prisoners/cause_of_death>': { name: 'CAUSE_OF_DEATH' },
-            // '<http://ldf.fi/schema/warsa/prisoners/marital_status>': { name: 'MARITAL_STATUS' },
             rank: {
-              facetId: 'rank',
-              predicate: '<http://ldf.fi/schema/warsa/prisoners/rank>',
-              name: 'RANK'
+                facetId: 'rank',
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/rank>',
+                name: 'RANK'
             },
             unit: {
-              facetId: 'unit',
-              predicate: '<http://ldf.fi/schema/warsa/prisoners/unit>',
-              name: 'UNIT'
+                facetId: 'unit',
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/unit>',
+                name: 'UNIT'
             },
             camps: {
-              facetId: 'camps',
-              predicate: '<http://ldf.fi/schema/warsa/prisoners/camps_and_hospitals>',
-              name: 'CAMPS'
+                facetId: 'camps',
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/camps_and_hospitals>',
+                name: 'CAMPS'
             },
             occupation: {
-              facetId: 'occupation',
-              predicate: '<http://ldf.fi/schema/bioc/has_occupation>',
-              name: 'OCCUPATION'
+                facetId: 'occupation',
+                predicate: '<http://ldf.fi/schema/bioc/has_occupation>',
+                name: 'OCCUPATION'
             },
             maritalStatus: {
-              facetId: 'maritalStatus',
-              predicate: '<http://ldf.fi/schema/warsa/prisoners/marital_status>',
-              name: 'MARITAL_STATUS'
+                facetId: 'maritalStatus',
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/marital_status>',
+                name: 'MARITAL_STATUS'
             },
             numChildren: {
-              facetId: 'numChildren',
-              predicate: '<http://ldf.fi/schema/warsa/prisoners/amount_children>',
-              name: 'NUM_CHILDREN'
+                facetId: 'numChildren',
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/amount_children>',
+                name: 'NUM_CHILDREN'
             },
             birthPlace: {
-              facetId: 'birthPlace',
-              predicate: '<http://ldf.fi/schema/warsa/prisoners/birth_place>',
-              name: 'BIRTH_MUNICIPALITY'
+                facetId: 'birthPlace',
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/birth_place>',
+                name: 'BIRTH_MUNICIPALITY'
             }
         };
 
         var properties = [
             '?name',
             '?occupation',
-            '?rank',
-            '?rank_uri',
+            '?rank__id',
+            '?rank__label',
+            '?rank_orig',
             '?unit',
+            '?warsa_unit',
             '?marital_status',
             '?children',
             '?explanation',
@@ -114,47 +113,49 @@
             '?death_date',
             '?returned_date',
             '?camps',
-//            '?cause_of_death',
+            //            '?cause_of_death',
         ];
 
         var prefixes =
-        ' PREFIX skos: <http://www.w3.org/2004/02/skos/core#>' +
-        ' PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>' +
-        ' PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>' +
-        ' PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>' +
-        ' PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>' +
-        ' PREFIX text: <http://jena.apache.org/text#>' +
-        ' PREFIX bioc: <http://ldf.fi/schema/bioc/>' +
-        ' PREFIX pow: <http://ldf.fi/schema/warsa/prisoners/>';
+            ' PREFIX skos: <http://www.w3.org/2004/02/skos/core#>' +
+            ' PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>' +
+            ' PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>' +
+            ' PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>' +
+            ' PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>' +
+            ' PREFIX text: <http://jena.apache.org/text#>' +
+            ' PREFIX bioc: <http://ldf.fi/schema/bioc/>' +
+            ' PREFIX pow: <http://ldf.fi/schema/warsa/prisoners/>';
 
         // The query for the results.
         // ?id is bound to the prisoner URI.
         var query =
-        ' SELECT ?id <PROPERTIES> WHERE {' +
-        '  { ' +
-        '    <RESULT_SET> ' +
-        '  } ' +
-        '  OPTIONAL { ?id skos:prefLabel ?name . }' +
-        '  OPTIONAL { ?id bioc:has_occupation ?occupation . }' +
-        '  OPTIONAL { ?id pow:rank ?rank_uri . ?rank_uri skos:prefLabel ?rank  . }' +
-        '  OPTIONAL { ?id pow:unit ?unit . }' +
-        '  OPTIONAL { ?id pow:amount_children ?children . }' +
-        '  OPTIONAL { ?id pow:marital_status ?marital_status . }' +
-        '  OPTIONAL { ?id pow:explanation ?explanation . }' +
-        '  OPTIONAL { ?id pow:place_captured ?place_captured . }' +
-        '  OPTIONAL { ?id pow:birth_date ?birth_date . }' +
-        '  OPTIONAL { ?id pow:birth_place ?birth_place . }' +
-        '  OPTIONAL { ?id pow:time_captured ?time_captured . }' +
-        '  OPTIONAL { ?id pow:death_date ?death_date . }' +
-        '  OPTIONAL { ?id pow:returned_date ?returned_date . }' +
-        '  OPTIONAL { ?id pow:camps_and_hospitals ?camps . }' +
-//        '  OPTIONAL { ?id pow:cause_of_death ?cause_of_death . }' +
-        ' }';
+            ' SELECT ?id <PROPERTIES> WHERE {' +
+            '  { ' +
+            '    <RESULT_SET> ' +
+            '  } ' +
+            '  OPTIONAL { ?id skos:prefLabel ?name . }' +
+            '  OPTIONAL { ?id bioc:has_occupation ?occupation . }' +
+            '  OPTIONAL { ?id pow:warsa_rank ?rank__id . ?rank__id skos:prefLabel ?rank__label  . }' +
+            '  OPTIONAL { ?id pow:rank ?rank_orig . }' +
+            '  OPTIONAL { ?id pow:unit ?unit . }' +
+            '  OPTIONAL { ?id pow:warsa_unit ?warsa_unit . }' +
+            '  OPTIONAL { ?id pow:amount_children ?children . }' +
+            '  OPTIONAL { ?id pow:marital_status ?marital_status . }' +
+            '  OPTIONAL { ?id pow:explanation ?explanation . }' +
+            '  OPTIONAL { ?id pow:place_captured ?place_captured . }' +
+            '  OPTIONAL { ?id pow:birth_date ?birth_date . }' +
+            '  OPTIONAL { ?id pow:birth_place ?birth_place . }' +
+            '  OPTIONAL { ?id pow:time_captured ?time_captured . }' +
+            '  OPTIONAL { ?id pow:death_date ?death_date . }' +
+            '  OPTIONAL { ?id pow:returned_date ?returned_date . }' +
+            '  OPTIONAL { ?id pow:camps_and_hospitals ?camps . }' +
+            //        '  OPTIONAL { ?id pow:cause_of_death ?cause_of_death . }' +
+            ' }';
 
         query = query.replace(/<PROPERTIES>/g, properties.join(' '));
 
         var endpointUrl = 'https://ldf.fi/warsa/sparql';
-//        var endpointUrl = 'http://localhost:3030/warsa/sparql';
+        //        var endpointUrl = 'http://localhost:3030/warsa/sparql';
 
         var facetOptions = {
             endpointUrl: endpointUrl,
@@ -187,13 +188,13 @@
         function getFacets() {
             // Translate the facet headers.
             return $translate(_.map(facets, 'name'))
-            .then(function(translations) {
-                var facetsCopy = angular.copy(facets);
-                _.forOwn(facetsCopy, function(val) {
-                    val.name = translations[val.name];
+                .then(function(translations) {
+                    var facetsCopy = angular.copy(facets);
+                    _.forOwn(facetsCopy, function(val) {
+                        val.name = translations[val.name];
+                    });
+                    return facetsCopy;
                 });
-                return facetsCopy;
-            });
         }
 
         function getFacetOptions() {

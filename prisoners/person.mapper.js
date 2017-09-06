@@ -11,41 +11,28 @@
 
     .constant('_', _) // eslint-disable-line no-undef
 
-    .service('personMapperService', personMapperService);
+    .factory('personMapperService', personMapperService)
+    .factory('Person', Person);
 
     /* ngInject */
-    function personMapperService(_, objectMapperService) {
+    function personMapperService(_, translateableObjectMapperService, Person) {
 
-        var multipleValueField = ['camps', 'time_captured', 'death_date', 'birth_date', 'occupation', 'rank', 'rank_uri'];
-
-        PersonMapper.prototype.postProcess = postProcess;
-
-        var proto = Object.getPrototypeOf(objectMapperService);
+        var proto = Object.getPrototypeOf(translateableObjectMapperService);
         PersonMapper.prototype = angular.extend({}, proto, PersonMapper.prototype);
 
         return new PersonMapper();
 
         function PersonMapper() {
-            this.objectClass = Object;
+            this.objectClass = Person;
         }
+    }
 
-        function castArray(value) {
-            if (value === undefined) {
-                return value;
-            }
-            return _.isArray(value) ? value : [value];
-        }
+    /* @ngInject */
+    function Person(TranslateableObject) {
+        Person.prototype = angular.extend({}, TranslateableObject.prototype);
 
-        function postProcess(prisoners) {
-            prisoners.forEach( function (prisoner) {
-                multipleValueField.forEach( function (field) {
-                    prisoner[field] = castArray(prisoner[field]);
-                    console.log(field, prisoner[field]);
-                });
-                prisoner['rankz'] = _.zipObject(prisoner['rank'], prisoner['rank_uri']);
-            });
+        return Person;
 
-            return prisoners;
-        }
+        function Person() { }
     }
 })();
