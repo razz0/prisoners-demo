@@ -159,7 +159,7 @@
 
         var facetOptions = {
             endpointUrl: endpointUrl,
-            rdfClass: '<http://ldf.fi/schema/warsa/prisoners/PrisonerOfWar>',
+            rdfClass: '<http://ldf.fi/schema/warsa/PrisonerRecord>',
             // Include the label (name) as a constraint so that we can use it for sorting.
             // Have to use ?s here as the subject variable.
             constraint: '?id skos:prefLabel ?name .',
