@@ -13,8 +13,8 @@
     /*
     * Controller for the results view.
     */
-    .controller( 'MainController', function ($scope, _, RESULTS_PER_PAGE,
-                prisonerService, NgTableParams, FacetHandler, facetUrlStateHandlerService ) {
+    .controller('MainController', function ($scope, _, RESULTS_PER_PAGE,
+            prisonerService, NgTableParams, FacetHandler, facetUrlStateHandlerService ) {
 
         var vm = this;
 
@@ -63,11 +63,16 @@
         }
 
         function updateResults(event, facetSelections) {
+            if (_.isEqual(vm.previousSelections, facetSelections.constraint)) {
+                return;
+            }
+            vm.previousSelections = angular.copy(facetSelections.constraint);
+
             facetUrlStateHandlerService.updateUrlParams(facetSelections);
             vm.isLoadingResults = true;
 
-            prisonerService.getResults( facetSelections )
-            .then( function ( pager ) {
+            prisonerService.getResults(facetSelections)
+            .then(function(pager) {
                 vm.pager = pager;
                 if (vm.tableParams) {
                     vm.tableParams.page(1);
