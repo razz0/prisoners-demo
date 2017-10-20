@@ -1,7 +1,23 @@
 <ul class="nav navbar-nav">
   <li><a href="" id="show-help" ng-click="vm.showHelp()" translate>PERSPECTIVE_HELP</a></li>
   <li>
-  <a ng-if="vm.lang === 'en'" ui-sref="facetApp.prisoners({ lang: 'fi' })" translate>IN_fi</a>
+    <a ng-if="vm.lang === 'en'" ui-sref="facetApp.prisoners({ lang: 'fi' })" translate>IN_fi</a>
     <a ng-if="vm.lang === 'fi'" ui-sref="facetApp.prisoners({ lang: 'en' })" translate>IN_en</a>
+  </li>
+  <li class="dropdown view-selection" ui-sref-active="{'active': 'facetApp.**'}">
+    <a class="dropdown-toggle active" data-toggle="dropdown" href="" id="statistics"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+      <span translate>RESULTS_DISPLAY</span><span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li ui-sref-active="active"><a ui-sref="facetApp.prisoners"><span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+          <span translate>TABLE</span></a></li>
+      <li ui-sref-active="active"><a ui-sref="facetApp.prisonersVisu({type: 'age'})"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+          <span translate>AGE_DISTRIBUTION</span></a></li>
+      <li ui-sref-active="active"><a ui-sref="facetApp.prisonersVisu({type: 'path'})"><span class="glyphicon glyphicon-random" aria-hidden="true"></span>
+          <span translate>SOLDIER_PATHS</span></a>
+      </li>
+      <li ui-sref-active="active"><a ui-sref="facetApp.prisonersVisu({type: 'bar'})"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+          <span translate>STATISTICS</span></a>
+      </li>
+    </ul>
   </li>
 </ul>

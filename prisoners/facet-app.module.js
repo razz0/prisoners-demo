@@ -5,11 +5,16 @@
 
     'use strict';
 
+    var server = 'https://ldf.fi';
+    var SPARQL_ENDPOINT_URL = server + '/warsa/sparql';
+    var PNR_ENDPOINT_URL = server + '/pnr/sparql';
+
     angular.module('facetApp', [
         'ui.router',
         'seco.facetedSearch',
         'seco.translateableObjectMapper',
         'ngTable',
+        'googlechart',
         'pascalprecht.translate'
     ])
 
@@ -18,6 +23,8 @@
     .constant('PAGES_PER_QUERY', 1)
     .constant('defaultLocale', 'fi')
     .constant('supportedLocales', ['fi', 'en'])
+    .constant('ENDPOINT_CONFIG', { endpointUrl: SPARQL_ENDPOINT_URL, usePost: true })
+    .constant('PNR_ENDPOINT_CONFIG', { endpointUrl: PNR_ENDPOINT_URL, usePost: true })
 
     .config(function($urlMatcherFactoryProvider) {
         $urlMatcherFactoryProvider.strictMode(false);
@@ -27,6 +34,8 @@
         $stateProvider
         .state('facetApp', {
             url: '/{lang}',
+            controller: 'FacetController',
+            controllerAs: 'facetCtrl',  // Must be different from child controllers
             templateUrl: 'views/main.html',
             resolve: {
                 checkLang: checkLang
@@ -34,8 +43,14 @@
         })
         .state('facetApp.prisoners', {
             url: '/prisoners',
-            templateUrl: 'views/prisoners.html',
+            templateUrl: 'views/prisoners.persons.html',
             controller: 'MainController',
+            controllerAs: 'vm'
+        })
+        .state('facetApp.prisonersVisu', {
+            url: '/prisoners/vis/{type}',
+            templateUrl: 'views/person-chart.html',
+            controller: 'PrisonerChartController',
             controllerAs: 'vm'
         });
     })
@@ -53,6 +68,8 @@
         $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
     })
 
+    .config(chartsConfigLoader)
+
     .run(function($state, $transitions, $location) {
         $transitions.onError({}, function(transition) {
             // Temporary workaround for transition.error() not returning
@@ -66,6 +83,20 @@
             });
         });
     });
+
+    /* @ngInject */
+    function chartsConfigLoader(agcLibraryLoaderProvider, agcGstaticLoaderProvider){
+
+        // Select the loader strategy.
+        agcLibraryLoaderProvider.setLoader('gstatic');
+
+        // Provider supports method chaining.
+        agcGstaticLoaderProvider
+        .setVersion('45')
+        .addPackage('corechart')
+        .addPackage('sankey');
+    }
+
 
     /* @ngInject */
     function checkLang($location, $stateParams, $q, $translate, _, supportedLocales, defaultLocale) {

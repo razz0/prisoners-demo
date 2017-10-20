@@ -1,7 +1,27 @@
 <ws-navbar></ws-navbar>
 
 <div class="container-fluid">
-  <div ui-view></div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="facets">
+        <seco-text-facet data-options="facetCtrl.facets.name"></seco-text-facet>
+        <seco-timespan-facet data-options="facetCtrl.facets.timeCaptured"></seco-timespan-facet>
+        <seco-timespan-facet data-options="facetCtrl.facets.deathDate"></seco-timespan-facet>
+        <seco-basic-facet data-options="facetCtrl.facets.unit"></seco-basic-facet>
+        <seco-basic-facet data-options="facetCtrl.facets.rank"></seco-basic-facet>
+        <seco-basic-facet data-options="facetCtrl.facets.camps"></seco-basic-facet>
+        <seco-basic-facet data-options="facetCtrl.facets.occupation"></seco-basic-facet>
+        <seco-basic-facet data-options="facetCtrl.facets.maritalStatus"></seco-basic-facet>
+        <seco-basic-facet data-options="facetCtrl.facets.numChildren"></seco-basic-facet>
+        <seco-basic-facet data-options="facetCtrl.facets.birthPlace"></seco-basic-facet>
+      </div>
+    </div>
+
+    <div class="col-md-10">
+      <div ui-view></div>
+    </div>
+
+  </div>
 </div>
 
 <div ng-include="'/page-templates/footer.html'"></div>

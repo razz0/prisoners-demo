@@ -13,3 +13,16 @@ table.casualty-table {
 table.casualty-table tr:nth-child(even) {
     background-color: #f8f6f4;
 }
+
+.path-chart {
+	width: 100%;
+}
+
+.age-chart {
+	height: 800px;
+	width: 100%;
+}
+
+.resultset-alert {
+  margin-top: 10px;
+}

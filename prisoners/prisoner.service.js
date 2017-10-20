@@ -8,10 +8,10 @@
     /*
      * prisoner service
      */
-    .service( 'prisonerService', prisonerService);
+    .service('prisonerService', prisonerService);
 
     /* @ngInject */
-    function prisonerService( $translate, _, FacetResultHandler, personMapperService ) {
+    function prisonerService($translate, _, FacetResultHandler, personMapperService, ENDPOINT_CONFIG) {
 
         /* Public API */
 
@@ -60,12 +60,12 @@
 
             rank: {
                 facetId: 'rank',
-                predicate: '<http://ldf.fi/schema/warsa/prisoners/rank>',
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/warsa_rank>',
                 name: 'RANK'
             },
             unit: {
                 facetId: 'unit',
-                predicate: '<http://ldf.fi/schema/warsa/prisoners/unit>',
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/warsa_unit>',
                 name: 'UNIT'
             },
             camps: {
@@ -154,16 +154,12 @@
 
         query = query.replace(/<PROPERTIES>/g, properties.join(' '));
 
-        var endpointUrl = 'https://ldf.fi/warsa/sparql';
-        //        var endpointUrl = 'http://localhost:3030/warsa/sparql';
-
         var facetOptions = {
-            endpointUrl: endpointUrl,
+            endpointUrl: ENDPOINT_CONFIG.endpointUrl,
             rdfClass: '<http://ldf.fi/schema/warsa/PrisonerRecord>',
             // Include the label (name) as a constraint so that we can use it for sorting.
             // Have to use ?s here as the subject variable.
-            constraint: '?id skos:prefLabel ?name .',
-            preferredLang : 'fi'
+            constraint: '?id skos:prefLabel ?name .'
         };
 
         var resultOptions = {
@@ -175,7 +171,7 @@
 
         // The FacetResultHandler handles forming the final queries for results,
         // querying the endpoint, and mapping the results to objects.
-        var resultHandler = new FacetResultHandler(endpointUrl, resultOptions);
+        var resultHandler = new FacetResultHandler(ENDPOINT_CONFIG, resultOptions);
 
         function getResults(facetSelections) {
             // Get the results sorted by ?name.
@@ -198,7 +194,13 @@
         }
 
         function getFacetOptions() {
-            return facetOptions;
+            return $translate('NO_SELECTION').then(function(noSelection) {
+                var prefLang = $translate.use();
+                var facetOptionsCopy = angular.copy(facetOptions);
+                facetOptionsCopy.preferredLang = [prefLang, prefLang === 'en' ? 'fi' : 'en', 'sv'];
+                facetOptionsCopy.noSelectionString = noSelection;
+                return facetOptionsCopy;
+            });
         }
     }
 })();

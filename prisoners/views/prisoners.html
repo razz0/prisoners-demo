@@ -1,21 +1,21 @@
 <div class="row">
   <div class="col-md-2">
-      <div class="facets">
-        <seco-text-facet data-options="vm.facets.name"></seco-text-facet>
-        <seco-timespan-facet data-options="vm.facets.timeCaptured"></seco-timespan-facet>
-        <seco-timespan-facet data-options="vm.facets.deathDate"></seco-timespan-facet>
-        <seco-basic-facet data-options="vm.facets.unit"></seco-basic-facet>
-        <seco-basic-facet data-options="vm.facets.rank"></seco-basic-facet>
-        <seco-basic-facet data-options="vm.facets.camps"></seco-basic-facet>
-        <seco-basic-facet data-options="vm.facets.occupation"></seco-basic-facet>
-        <seco-basic-facet data-options="vm.facets.maritalStatus"></seco-basic-facet>
-        <seco-basic-facet data-options="vm.facets.numChildren"></seco-basic-facet>
-        <seco-basic-facet data-options="vm.facets.birthPlace"></seco-basic-facet>
-      </div>
+    <div class="facets">
+      <seco-text-facet data-options="vm.facets.name"></seco-text-facet>
+      <seco-timespan-facet data-options="vm.facets.timeCaptured"></seco-timespan-facet>
+      <seco-timespan-facet data-options="vm.facets.deathDate"></seco-timespan-facet>
+      <seco-basic-facet data-options="vm.facets.unit"></seco-basic-facet>
+      <seco-basic-facet data-options="vm.facets.rank"></seco-basic-facet>
+      <seco-basic-facet data-options="vm.facets.camps"></seco-basic-facet>
+      <seco-basic-facet data-options="vm.facets.occupation"></seco-basic-facet>
+      <seco-basic-facet data-options="vm.facets.maritalStatus"></seco-basic-facet>
+      <seco-basic-facet data-options="vm.facets.numChildren"></seco-basic-facet>
+      <seco-basic-facet data-options="vm.facets.birthPlace"></seco-basic-facet>
+    </div>
   </div>
 
   <div class="col-md-10">
-    <div ng-include="'views/prisoners.persons.html'"></div>
+    <div ui-view></div>
   </div>
 
 </div>
