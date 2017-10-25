@@ -70,7 +70,7 @@
             },
             camps: {
                 facetId: 'camps',
-                predicate: '<http://ldf.fi/schema/warsa/prisoners/camps_and_hospitals>',
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/located_in>/<http://ldf.fi/schema/warsa/prisoners/place>',
                 name: 'CAMPS'
             },
             occupation: {
