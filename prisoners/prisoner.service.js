@@ -123,7 +123,6 @@
             '?death_date',
             '?returned_date',
             '?camps',
-            //            '?cause_of_death',
         ];
 
         var prefixes =
@@ -158,8 +157,7 @@
             '  OPTIONAL { ?id pow:time_captured ?time_captured . }' +
             '  OPTIONAL { ?id pow:death_date ?death_date . }' +
             '  OPTIONAL { ?id pow:returned_date ?returned_date . }' +
-            '  OPTIONAL { ?id pow:camps_and_hospitals ?camps . }' +
-            //        '  OPTIONAL { ?id pow:cause_of_death ?cause_of_death . }' +
+            '  OPTIONAL { ?id pow:located_in/pow:place ?camps . }' +
             ' }';
 
         query = query.replace(/<PROPERTIES>/g, properties.join(' '));
