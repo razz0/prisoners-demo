@@ -370,7 +370,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '.tmp/concat/scripts',
-          src: '*.js',
+          src: 'scripts*.js',
           dest: '.tmp/concat/scripts'
         }]
       }
@@ -385,7 +385,7 @@ module.exports = function (grunt) {
                 expand: true,
                 cwd: '<%= yeoman.dist %>',
                 src: [
-                    'scripts/*.js',
+                    'scripts/scripts*.js',
                     '**/*.{css,html}'
                 ],
                 dest: '<%= yeoman.dist %>'

@@ -23,7 +23,7 @@
     "angular": "^1.6.1",
     "angular-translate": "^2.14.0",
     "angular-translate-loader-static-files": "^2.10.0",
-    "angular-ui-router": "^1.0.0-rc.1",
+    "angular-ui-router": "^1.0.0",
     "sparql-faceter": "#master",
     "sparql-result-mapper-with-translate": "ng-sparql-result-mapper-with-translate#^0.4.3",
     "angular-google-chart": "1.0.0-beta.1"
