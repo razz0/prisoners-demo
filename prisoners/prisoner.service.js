@@ -92,6 +92,16 @@
                 facetId: 'birthPlace',
                 predicate: '<http://ldf.fi/schema/warsa/prisoners/birth_place>',
                 name: 'BIRTH_MUNICIPALITY'
+            },
+            residencePlace: {
+                facetId: 'residencePlace',
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/residence_place>',
+                name: 'RESIDENCE_MUNICIPALITY'
+            },
+            deathPlace: {
+                facetId: 'deathPlace',
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/municipality_of_death>',
+                name: 'DEATH_MUNICIPALITY'
             }
         };
 

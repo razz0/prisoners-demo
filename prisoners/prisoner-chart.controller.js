@@ -48,30 +48,35 @@
         }
 
         var defaultPath = [
-            '<http://ldf.fi/schema/warsa/prisoners/birth_place>',
-            '<http://ldf.fi/schema/warsa/prisoners/residence_place>',
-            '<http://ldf.fi/schema/warsa/prisoners/municipality_of_death>',
+            'birthPlace',
+            'residencePlace',
+            'deathPlace',
         ];
 
         var selections = [
-            '<http://ldf.fi/schema/warsa/prisoners/birth_place>',
-            '<http://ldf.fi/schema/warsa/prisoners/residence_place>',
-            '<http://ldf.fi/schema/warsa/prisoners/municipality_of_death>',
-            '<http://ldf.fi/schema/warsa/prisoners/warsa_unit>',
-            '<http://ldf.fi/schema/warsa/prisoners/warsa_rank>',
-            '<http://ldf.fi/schema/bioc/has_occupation>',
-            '<http://ldf.fi/schema/warsa/prisoners/amount_children>',
+            'birthPlace',
+            'residencePlace',
+            'deathPlace',
+            'unit',
+            'rank',
+            'occupation',
+            'numChildren',
         ];
 
-        vm.barSelection = selections[3];
+        vm.barSelection = selections[4];
 
         prisonerService.getFacets().then(function(facets) {
+            vm.facets = facets;
             vm.pathSelections = [];
             vm.predicates = _.transform(facets, function(result, value) {
-                var pred = { name: value.name, predicate: value.predicate };
-                if (_.includes(selections, pred.predicate)) {
+                var pred = {
+                    facetId: value.facetId,
+                    name: value.name,
+                    predicate: value.predicate,
+                };
+                if (_.includes(selections, pred.facetId)) {
                     result.push(pred);
-                    if (_.includes(defaultPath, pred.predicate)) {
+                    if (_.includes(defaultPath, pred.facetId)) {
                         vm.pathSelections.push(pred);
                     }
                 }
@@ -152,7 +157,7 @@
         }
 
         function getResultsAge(facetSelections) {
-            return personChartService.getResultsAge(facetSelections);
+            return personChartService.getResultsAge(facetSelections.constraint.join(' '), '<http://ldf.fi/schema/warsa/prisoners/birth_date>', '<http://ldf.fi/schema/warsa/prisoners/time_captured>');
         }
 
         function getPathResults(facetSelections) {
@@ -160,7 +165,7 @@
         }
 
         function getBarResults(facetSelections) {
-            return personChartService.getResultsBarChart(facetSelections, vm.barSelection);
+            return personChartService.getResultsBarChart(facetSelections, _.find(vm.predicates, ['facetId', vm.barSelection]).predicate);
         }
     }
 })();

@@ -4,7 +4,7 @@
     <select ng-change="vm.updateVisualization()" ng-options="pred as pred.name for pred in vm.predicates" ng-model="vm.pathSelections[vm.pathSelections.length]"><option value=""></option></select>
   </div>
   <div ng-switch-when="bar">
-    <select ng-change="vm.updateVisualization()" ng-options="pred.predicate as pred.name for pred in vm.predicates" ng-model="vm.barSelection"><option value=""></option></select>
+    <select ng-change="vm.updateVisualization()" ng-options="pred.facetId as pred.name for pred in vm.predicates" ng-model="vm.barSelection"><option value=""></option></select>
   </div>
 </div>
 <span us-spinner="{radius:60, width:16, length: 64}" spinner-on="vm.isLoadingResults"></span>

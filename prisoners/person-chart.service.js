@@ -25,26 +25,27 @@
         /* Implementation */
 
         var queryAge = PREFIXES +
-        '  SELECT ?age (count(DISTINCT ?id) as ?count)' +
-        '  WHERE {' +
+        ' SELECT ?age (count(DISTINCT ?id) as ?count) {' +
         '  { ' +
-        '    <RESULT_SET> ' +
+        '   SELECT ?id (MIN(?b) AS ?birth) (MIN(?e) AS ?end) {' +
+        '     <RESULT_SET> ' +
+        '    ?id <START_PROP> ?b .' +
+        '    ?id <END_PROP> ?e .' +
+        '   } GROUP BY ?id ' +
         '  } ' +
-        '  ?id <START_PROP> ?birth .' +
-        '  ?id <END_PROP> ?end .' +
         '  BIND( year(?end) - year(?birth) - if(month(?end) < month(?birth) || ' +
         '   (month(?end) = month(?birth) && day(?end) < day(?birth)), 1, 0) as ?age )' +
-        '  FILTER(BOUND(?age) && ?age < 200) ' +
-        '  } GROUP BY ?age ORDER BY ?age';
+        '  FILTER(BOUND(?age) && ?age < 200 && ?age > 0) ' +
+        ' } GROUP BY ?age ORDER BY ?age';
 
         var queryBarChart = PREFIXES +
-        '  SELECT ?var (count(DISTINCT ?id) as ?count)' +
-        '  WHERE {' +
-        '  { ' +
-        '    <RESULT_SET> ' +
-        '  } ' +
-        '  ?id <PREDICATE> ?var . ' +
-        '  } GROUP BY ?var ORDER BY DESC(?count)';
+        ' SELECT ?var (count(DISTINCT ?id) as ?count)' +
+        ' WHERE {' +
+        ' { ' +
+        '   <RESULT_SET> ' +
+        ' } ' +
+        ' ?id <PREDICATE> ?var . ' +
+        ' } GROUP BY ?var ORDER BY DESC(?count)';
 
         var pathPart =
         ' { ' +
