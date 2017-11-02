@@ -98,10 +98,15 @@
                 predicate: '<http://ldf.fi/schema/warsa/prisoners/residence_place>',
                 name: 'RESIDENCE_MUNICIPALITY'
             },
+            capturingPlace: {
+                facetId: 'capturingPlace',
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/place_captured_municipality>|<http://ldf.fi/schema/warsa/prisoners/place_captured_battle>',
+                name: 'PLACE_CAPTURED'
+            },
             deathPlace: {
                 facetId: 'deathPlace',
-                predicate: '<http://ldf.fi/schema/warsa/prisoners/municipality_of_death>',
-                name: 'DEATH_MUNICIPALITY'
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/municipality_of_death>|<http://ldf.fi/schema/warsa/prisoners/death_place>',
+                name: 'PLACE_OF_DEATH'
             }
         };
 

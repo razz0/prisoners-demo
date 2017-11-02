@@ -50,12 +50,14 @@
         var defaultPath = [
             'birthPlace',
             'residencePlace',
+            'capturingPlace',
             'deathPlace',
         ];
 
         var selections = [
             'birthPlace',
             'residencePlace',
+            'capturingPlace',
             'deathPlace',
             'unit',
             'rank',

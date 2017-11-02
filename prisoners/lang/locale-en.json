@@ -20,6 +20,7 @@
     "RESIDENCE_MUNICIPALITY": "Residence",
     "DEATH_MUNICIPALITY": "Death Municipality",
     "PLACE_OF_DEATH": "Place of Death",
+    "PLACE_CAPTURED": "Place of Capture",
     "GENDER": "Gender",
     "MARITAL_STATUS": "Marital Status",
     "OCCUPATION": "Occupation",
