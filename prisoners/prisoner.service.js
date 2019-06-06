@@ -70,7 +70,7 @@
             },
             camps: {
                 facetId: 'camps',
-                predicate: '<http://ldf.fi/schema/warsa/prisoners/located_in>/<http://ldf.fi/schema/warsa/prisoners/place>',
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/located_in>/<http://ldf.fi/schema/warsa/prisoners/location_literal>',
                 name: 'CAMPS'
             },
             occupation: {
@@ -90,7 +90,7 @@
             },
             birthPlace: {
                 facetId: 'birthPlace',
-                predicate: '<http://ldf.fi/schema/warsa/prisoners/birth_place>',
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/birth_place_literal>',
                 name: 'BIRTH_MUNICIPALITY'
             },
             residencePlace: {
@@ -158,11 +158,11 @@
             '  OPTIONAL { ?id pow:explanation ?explanation . }' +
             '  OPTIONAL { ?id pow:place_captured ?place_captured . }' +
             '  OPTIONAL { ?id pow:birth_date ?birth_date . }' +
-            '  OPTIONAL { ?id pow:birth_place ?birth_place . }' +
+            '  OPTIONAL { ?id pow:birth_place_literal ?birth_place . }' +
             '  OPTIONAL { ?id pow:time_captured ?time_captured . }' +
             '  OPTIONAL { ?id pow:death_date ?death_date . }' +
             '  OPTIONAL { ?id pow:returned_date ?returned_date . }' +
-            '  OPTIONAL { ?id pow:located_in/pow:place ?camps . }' +
+            '  OPTIONAL { ?id pow:located_in/pow:location_literal ?camps . }' +
             ' }';
 
         query = query.replace(/<PROPERTIES>/g, properties.join(' '));
