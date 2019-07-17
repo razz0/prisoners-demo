@@ -6,7 +6,9 @@
 <table class="table casualty-table ng-table-responsive" ng-table="vm.tableParams">
   <tr ng-show="!vm.isLoadingResults" ng-repeat="person in $data">
     <td data-title="'NAME' | translate">
-      <a ng-href="/page?uri={{ ::person.id }}" ws-page-link ng-if="::person.name">{{::person.name}}</a>
+      <a ng-href="/persons/{{ ::person.warsa_person | localId }}" ws-page-link ng-if="::person.warsa_person">
+        {{::person.name}}
+      </a>
     </td>
     <td data-title="'BIRTH_DATE' | translate">
       <span ng-repeat="time in ::person.birth_date | castArray">
@@ -17,34 +19,34 @@
     </td>
     <td data-title="'RANK' | translate">
       <span ng-repeat="rank in ::person.rank | castArray">
-        <a ws-page-link ng-href="/ranks/page?uri={{::rank.id}}">{{ ::rank.label }}</a>{{ $last ? '' : ', ' }}
+        <a ws-page-link ng-href="/ranks/page/{{ ::rank.id | localId }}">{{ ::rank.label }}</a>{{ $last ? '' : ', ' }}
       </span>
       <span ng-if="::(!person.rank && person.rank_orig)">{{ ::person.rank_orig | join:', ' }}</span>
     </td>
     <td data-title="'UNIT' | translate">
       <span ng-switch="!!person.warsa_unit">
-        <a ng-switch-when="true" ws-page-link ng-href="/units/page?uri={{ ::person.warsa_unit }}">{{::person.unit}}</a>
+        <a ng-switch-when="true" ws-page-link ng-href="/units/page/{{ ::person.warsa_unit | localId}}">{{::person.unit}}</a>
         <span ng-switch-when="false">{{::person.unit}}</span>
       </span>
     </td>
     <td data-title="'TIME_CAPTURED' | translate">
       <span ng-repeat="time in ::person.time_captured | castArray">
-        <a ws-page-link ng-href="/times/page?uri=http://ldf.fi/warsa/events/times/time_{{::time}}-{{::time}}">{{::time | date:'dd.MM.yyyy'}}</a>{{ $last ? '' : ', ' }}
+        <a ws-page-link ng-href="/times/page/time_{{::time}}-{{::time}}">{{::time | date:'dd.MM.yyyy'}}</a>{{ $last ? '' : ', ' }}
       </span>
     </td>
     <td data-title="'CAMPS' | translate">
       <span ng-repeat="camp in ::person.camps | castArray">
-        <a href="#">{{::camp}}</a>{{$last ? '' : ', '}}
+        {{::camp}}{{$last ? '' : ', '}}
       </span>
     </td>
     <td data-title="'RETURNED_DATE' | translate">
-      <a ws-page-link ng-href="/times/page?uri=http://ldf.fi/warsa/events/times/time_{{::person.returned_date}}-{{::person.returned_date}}">
+      <a ws-page-link ng-href="/times/page/time_{{::person.returned_date}}-{{::person.returned_date}}">
         {{::person.returned_date | date:'dd.MM.yyyy'}}
       </a>
     </td>
     <td data-title="'DEATH_DATE' | translate">
       <span ng-repeat="time in ::person.death_date | castArray">
-        <a ws-page-link ng-href="/times/page?uri=http://ldf.fi/warsa/events/times/time_{{::time}}-{{::time}}">
+        <a ws-page-link ng-href="/times/page/time_{{::time}}-{{::time}}">
           {{::time | date:'dd.MM.yyyy'}}
         </a>
       </span>

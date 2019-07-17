@@ -40,10 +40,10 @@
                 facetId: 'timeCaptured',
                 predicate: '<http://ldf.fi/time_captured>',
                 name: 'TIME_CAPTURED',
-                startPredicate: '<http://ldf.fi/schema/warsa/prisoners/time_captured>',
-                endPredicate: '<http://ldf.fi/schema/warsa/prisoners/time_captured>',
-                min: '1939-10-01',
-                max: '1977-07-27',
+                startPredicate: '<http://ldf.fi/schema/warsa/prisoners/date_of_capture>',
+                endPredicate: '<http://ldf.fi/schema/warsa/prisoners/date_of_capture>',
+                min: '1939-09-30',
+                max: '1945-06-21',
                 enabled: true
             },
 
@@ -51,9 +51,9 @@
                 facetId: 'deathDate',
                 predicate: '<http://ldf.fi/death_date>',
                 name: 'DEATH_DATE',
-                startPredicate: '<http://ldf.fi/schema/warsa/prisoners/death_date>',
-                endPredicate: '<http://ldf.fi/schema/warsa/prisoners/death_date>',
-                min: '1939-10-01',
+                startPredicate: '<http://ldf.fi/schema/warsa/prisoners/date_of_death>',
+                endPredicate: '<http://ldf.fi/schema/warsa/prisoners/date_of_death>',
+                min: '1939-12-07',
 //                max: '1989-12-31',
                 enabled: true
             },
@@ -112,6 +112,7 @@
 
         var properties = [
             '?name',
+            '?warsa_person',
             '?occupation',
             '?rank__id',
             '?rank__label',
@@ -149,6 +150,7 @@
             '    <RESULT_SET> ' +
             '  } ' +
             '  OPTIONAL { ?id skos:prefLabel ?name . }' +
+            '  OPTIONAL { ?id crm:P70_documents ?warsa_person . }' +
             '  OPTIONAL { ?id bioc:has_occupation ?occupation . }' +
             '  OPTIONAL { ?id pow:rank ?rank__id . ?rank__id skos:prefLabel ?rank__label  . }' +
             '  OPTIONAL { ?id pow:rank_literal ?rank_orig . }' +

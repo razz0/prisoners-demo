@@ -12,5 +12,10 @@
         return function(input, delimiter) {
             return castArrayFilter(input).join(delimiter);
         };
+    })
+    .filter('localId', function() {
+        return function(input) {
+            return input.replace(new RegExp('^.*/(.*?)$'), '$1');
+        };
     });
 })();
