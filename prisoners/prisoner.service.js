@@ -152,7 +152,7 @@
             '  OPTIONAL { ?id bioc:has_occupation ?occupation . }' +
             '  OPTIONAL { ?id pow:rank ?rank__id . ?rank__id skos:prefLabel ?rank__label  . }' +
             '  OPTIONAL { ?id pow:rank_literal ?rank_orig . }' +
-            '  OPTIONAL { ?id pow:unit ?unit . }' +
+            '  OPTIONAL { ?id pow:unit_literal ?unit . }' +
             '  OPTIONAL { ?id pow:unit ?warsa_unit . }' +
             '  OPTIONAL { ?id pow:amount_children ?children . }' +
             '  OPTIONAL { ?id pow:marital_status ?marital_status . }' +
