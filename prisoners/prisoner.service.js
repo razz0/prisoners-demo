@@ -80,7 +80,7 @@
             },
             maritalStatus: {
                 facetId: 'maritalStatus',
-                predicate: '<http://ldf.fi/schema/warsa/prisoners/marital_status_literal>',
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/marital_status>',
                 name: 'MARITAL_STATUS'
             },
             numChildren: {
@@ -90,7 +90,7 @@
             },
             birthPlace: {
                 facetId: 'birthPlace',
-                predicate: '<http://ldf.fi/schema/warsa/prisoners/municipality_of_birth>',
+                predicate: '<http://ldf.fi/schema/warsa/municipality_of_birth>',
                 name: 'BIRTH_MUNICIPALITY'
             },
             residencePlace: {
