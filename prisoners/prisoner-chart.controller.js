@@ -159,7 +159,7 @@
         }
 
         function getResultsAge(facetSelections) {
-            return personChartService.getResultsAge(facetSelections.constraint.join(' '), '<http://ldf.fi/schema/warsa/prisoners/birth_date>', '<http://ldf.fi/schema/warsa/prisoners/time_captured>');
+            return personChartService.getResultsAge(facetSelections.constraint.join(' '), '<http://ldf.fi/schema/warsa/date_of_birth>', '<http://ldf.fi/schema/warsa/prisoners/date_of_capture>');
         }
 
         function getPathResults(facetSelections) {
