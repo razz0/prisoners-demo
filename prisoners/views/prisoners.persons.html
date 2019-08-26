@@ -29,16 +29,43 @@
         <span ng-switch-when="false">{{::person.unit}}</span>
       </span>
     </td>
+    <td data-title="'OCCUPATION' | translate">
+      <span ng-switch="!!person.occupation_label">
+          <span ng-switch-when="true">
+            <span ng-repeat="occupation in ::person.occupation_label | castArray">
+              {{::occupation}}{{$last ? '' : ', '}}
+            </span>
+        </span>
+      <span ng-switch-when="false">
+        <span ng-repeat="occupation_literal in ::person.occupation_literal | castArray">
+            {{::occupation_literal}}{{$last ? '' : ', '}}
+          </span>
+        </span>
+      </span>
+    </td>
+    <td data-title="'NUM_CHILDREN' | translate">
+        <span ng-repeat="children in ::person.children | castArray">
+          {{::children}}{{$last ? '' : ', '}}
+        </span>
+    </td>
+    <!-- <td data-title="'TIME_MIA' | translate">
+      {{::person.time_mia}}
+    </td> -->
     <td data-title="'TIME_CAPTURED' | translate">
       <span ng-repeat="time in ::person.time_captured | castArray">
         <a ws-page-link ng-href="/times/page/time_{{::time}}-{{::time}}">{{::time | date:'dd.MM.yyyy'}}</a>{{ $last ? '' : ', ' }}
       </span>
     </td>
-    <td data-title="'CAMPS' | translate">
+    <td data-title="'CAPTURE_MUNICIPALITY' | translate">
+      <a ws-page-link ng-href="/places/page?oldMap=true&uri={{::person.place_captured.id}}">
+        {{::person.place_captured.label}}
+      </a>
+    </td>
+      <!-- <td data-title="'CAMPS' | translate">
       <span ng-repeat="camp in ::person.camps | castArray">
         {{::camp}}{{$last ? '' : ', '}}
       </span>
-    </td>
+    </td> -->
     <td data-title="'RETURNED_DATE' | translate">
       <a ws-page-link ng-href="/times/page/time_{{::person.returned_date}}-{{::person.returned_date}}">
         {{::person.returned_date | date:'dd.MM.yyyy'}}

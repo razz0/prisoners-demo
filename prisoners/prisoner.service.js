@@ -11,7 +11,7 @@
     .service('prisonerService', prisonerService);
 
     /* @ngInject */
-    function prisonerService($translate, _, FacetResultHandler, personMapperService, ENDPOINT_CONFIG) {
+    function prisonerService($translate, _, FacetResultHandler, personMapperService, ENDPOINT_CONFIG, PNR_ENDPOINT_CONFIG) {
 
         /* Public API */
 
@@ -35,7 +35,16 @@
                 name: 'NAME',
                 enabled: true
             },
-
+            birthDate: {
+                facetId: 'birthDate',
+                predicate: '<http://ldf.fi/date_of_birth>',
+                name: 'BIRTH_DATE',
+                startPredicate: '<http://ldf.fi/schema/warsa/date_of_birth>',
+                endPredicate: '<http://ldf.fi/schema/warsa/date_of_birth>',
+                // min: '1939-09-30',
+                max: '1945-06-21',
+                enabled: true
+            },
             timeCaptured: {
                 facetId: 'timeCaptured',
                 predicate: '<http://ldf.fi/time_captured>',
@@ -46,7 +55,6 @@
                 max: '1945-06-21',
                 enabled: true
             },
-
             deathDate: {
                 facetId: 'deathDate',
                 predicate: '<http://ldf.fi/death_date>',
@@ -68,11 +76,11 @@
                 predicate: '<http://ldf.fi/schema/warsa/prisoners/unit>',
                 name: 'UNIT'
             },
-            camps: {
-                facetId: 'camps',
-                predicate: '<http://ldf.fi/schema/warsa/prisoners/captivity>/<http://ldf.fi/schema/warsa/prisoners/location_literal>',
-                name: 'CAMPS'
-            },
+            // camps: {
+            //     facetId: 'camps',
+            //     predicate: '<http://ldf.fi/schema/warsa/prisoners/captivity>/<http://ldf.fi/schema/warsa/prisoners/location_literal>',
+            //     name: 'CAMPS'
+            // },
             occupation: {
                 facetId: 'occupation',
                 predicate: '<http://ldf.fi/schema/bioc/has_occupation>',
@@ -98,22 +106,29 @@
                 predicate: '<http://ldf.fi/schema/warsa/prisoners/municipality_of_residence>',
                 name: 'RESIDENCE_MUNICIPALITY'
             },
+            domicilePlace: {
+                facetId: 'domicilePlace',
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/municipality_of_domicile>',
+                name: 'DOMICILE_MUNICIPALITY'
+            },
             capturingPlace: {
                 facetId: 'capturingPlace',
-                predicate: '<http://ldf.fi/schema/warsa/prisoners/place_of_capture_literal>|<http://ldf.fi/schema/warsa/prisoners/place_of_capture_battle_literal>',
-                name: 'PLACE_CAPTURED'
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/municipality_of_capture>',
+                name: 'CAPTURE_MUNICIPALITY'
             },
             deathPlace: {
                 facetId: 'deathPlace',
-                predicate: '<http://ldf.fi/schema/warsa/prisoners/municipality_of_death>|<http://ldf.fi/schema/warsa/prisoners/place_of_death>',
-                name: 'PLACE_OF_DEATH'
+                predicate: '<http://ldf.fi/schema/warsa/prisoners/municipality_of_death>',
+                name: 'DEATH_MUNICIPALITY',
+                services: [PNR_ENDPOINT_CONFIG.endpointUrl]
             }
         };
 
         var properties = [
             '?name',
             '?warsa_person',
-            '?occupation',
+            '?occupation_label',
+            '?occupation_literal',
             '?rank__id',
             '?rank__label',
             '?rank_orig',
@@ -122,10 +137,13 @@
             '?marital_status',
             '?children',
             '?explanation',
-            '?place_captured',
+            '?place_captured__id',
+            '?place_captured__label',
+            '?place_mia',
             '?birth_date',
             '?birth_place',
             '?time_captured',
+            '?time_mia',
             '?death_date',
             '?returned_date',
             '?camps',
@@ -151,18 +169,22 @@
             '  } ' +
             '  OPTIONAL { ?id skos:prefLabel ?name . }' +
             '  OPTIONAL { ?id crm:P70_documents ?warsa_person . }' +
-            '  OPTIONAL { ?id bioc:has_occupation ?occupation . }' +
+            '  OPTIONAL { ?id bioc:has_occupation/skos:prefLabel ?occupation_label . }' +
+            '  OPTIONAL { ?id pow:occupation_literal ?occupation_literal . }' +
             '  OPTIONAL { ?id pow:rank ?rank__id . ?rank__id skos:prefLabel ?rank__label  . }' +
             '  OPTIONAL { ?id pow:rank_literal ?rank_orig . }' +
             '  OPTIONAL { ?id pow:unit_literal ?unit . }' +
             '  OPTIONAL { ?id pow:unit ?warsa_unit . }' +
-            '  OPTIONAL { ?id pow:amount_children ?children . }' +
+            '  OPTIONAL { ?id pow:number_of_children ?children . }' +
             '  OPTIONAL { ?id pow:marital_status ?marital_status . }' +
             '  OPTIONAL { ?id pow:explanation ?explanation . }' +
-            '  OPTIONAL { ?id pow:place_captured ?place_captured . }' +
+            '  OPTIONAL { ?id pow:municipality_of_capture ?place_captured__id . ?place_captured__id skos:prefLabel ?place_captured__label }' +
+            '  OPTIONAL { ?id pow:municipality_of_capture_literal ?place_captured_literal . }' +
+            '  OPTIONAL { ?id pow:place_of_going_mia_literal ?place_mia . }' +
             '  OPTIONAL { ?id warsa:date_of_birth ?birth_date . }' +
             '  OPTIONAL { ?id pow:birth_place_literal ?birth_place . }' +
             '  OPTIONAL { ?id pow:date_of_capture ?time_captured . }' +
+            '  OPTIONAL { ?id pow:date_of_going_mia ?time_mia . }' +
             '  OPTIONAL { ?id pow:date_of_death ?death_date . }' +
             '  OPTIONAL { ?id pow:date_of_return ?returned_date . }' +
             '  OPTIONAL { ?id pow:captivity/pow:location_literal ?camps . }' +
