@@ -10,6 +10,18 @@
         {{::person.name}}
       </a>
     </td>
+    <td data-title="'BIRTH_MUNICIPALITY' | translate">
+      <a ws-page-link ng-href="/places/page?oldMap=true&uri={{::person.municipality_of_birth_uri}}">
+        {{::person.municipality_of_birth_literal}}
+      </a>
+    </td>
+    <td data-title="'BIRTH_DATE' | translate">
+      <span ng-repeat="time in ::person.birth_date | castArray">
+        <a ws-page-link ng-if="::person.birth_date" ng-href="/times/page/time_{{::time}}-{{::time}}">
+          {{::time | date:'dd.MM.yyyy'}}
+        </a>
+      </span>
+    </td>
     <td data-title="'BIRTH_DATE' | translate">
       <span ng-repeat="time in ::person.birth_date | castArray">
         <a ws-page-link ng-if="::person.birth_date" ng-href="/times/page/time_{{::time}}-{{::time}}">
@@ -43,14 +55,6 @@
         </span>
       </span>
     </td>
-    <td data-title="'NUM_CHILDREN' | translate">
-        <span ng-repeat="children in ::person.children | castArray">
-          {{::children}}{{$last ? '' : ', '}}
-        </span>
-    </td>
-    <!-- <td data-title="'TIME_MIA' | translate">
-      {{::person.time_mia}}
-    </td> -->
     <td data-title="'TIME_CAPTURED' | translate">
       <span ng-repeat="time in ::person.time_captured | castArray">
         <a ws-page-link ng-href="/times/page/time_{{::time}}-{{::time}}">{{::time | date:'dd.MM.yyyy'}}</a>{{ $last ? '' : ', ' }}
@@ -61,11 +65,6 @@
         {{::person.place_captured.label}}
       </a>
     </td>
-      <!-- <td data-title="'CAMPS' | translate">
-      <span ng-repeat="camp in ::person.camps | castArray">
-        {{::camp}}{{$last ? '' : ', '}}
-      </span>
-    </td> -->
     <td data-title="'RETURNED_DATE' | translate">
       <a ws-page-link ng-href="/times/page/time_{{::person.returned_date}}-{{::person.returned_date}}">
         {{::person.returned_date | date:'dd.MM.yyyy'}}
@@ -77,6 +76,11 @@
           {{::time | date:'dd.MM.yyyy'}}
         </a>
       </span>
+    </td>
+    <td data-title="'DEATH_MUNICIPALITY' | translate">
+        <a ws-page-link ng-href="/places/page?oldMap=true&uri={{::person.municipality_of_death_uri}}">
+          {{::person.municipality_of_death_literal}}
+        </a>
     </td>
   </tr>
 </table>

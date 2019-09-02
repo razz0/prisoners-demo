@@ -135,18 +135,22 @@
             '?unit',
             '?warsa_unit',
             '?marital_status',
-            '?children',
-            '?explanation',
+            // '?children',
+            // '?explanation',
             '?place_captured__id',
             '?place_captured__label',
-            '?place_mia',
+            // '?place_captured_literal',
+            // '?place_mia',
             '?birth_date',
-            '?birth_place',
+            '?municipality_of_birth_uri',
+            '?municipality_of_birth_literal',
             '?time_captured',
-            '?time_mia',
+            // '?time_mia',
             '?death_date',
+            '?municipality_of_death_uri',  // Label would be in PNR service
+            '?municipality_of_death_literal',
             '?returned_date',
-            '?camps',
+            // '?camps',
         ];
 
         var prefixes =
@@ -175,19 +179,22 @@
             '  OPTIONAL { ?id pow:rank_literal ?rank_orig . }' +
             '  OPTIONAL { ?id pow:unit_literal ?unit . }' +
             '  OPTIONAL { ?id pow:unit ?warsa_unit . }' +
-            '  OPTIONAL { ?id pow:number_of_children ?children . }' +
-            '  OPTIONAL { ?id pow:marital_status ?marital_status . }' +
-            '  OPTIONAL { ?id pow:explanation ?explanation . }' +
+            // '  OPTIONAL { ?id pow:number_of_children ?children . }' +
+            // '  OPTIONAL { ?id pow:marital_status ?marital_status . }' +
+            // '  OPTIONAL { ?id pow:explanation ?explanation . }' +
             '  OPTIONAL { ?id pow:municipality_of_capture ?place_captured__id . ?place_captured__id skos:prefLabel ?place_captured__label }' +
-            '  OPTIONAL { ?id pow:municipality_of_capture_literal ?place_captured_literal . }' +
-            '  OPTIONAL { ?id pow:place_of_going_mia_literal ?place_mia . }' +
+            // '  OPTIONAL { ?id pow:municipality_of_capture_literal ?place_captured_literal . }' +
+            // '  OPTIONAL { ?id pow:place_of_going_mia_literal ?place_mia . }' +
             '  OPTIONAL { ?id warsa:date_of_birth ?birth_date . }' +
-            '  OPTIONAL { ?id pow:birth_place_literal ?birth_place . }' +
+            '  OPTIONAL { ?id warsa:municipality_of_birth_literal ?municipality_of_birth_literal . }' +
+            '  OPTIONAL { ?id warsa:municipality_of_birth ?municipality_of_birth_uri . }' +
             '  OPTIONAL { ?id pow:date_of_capture ?time_captured . }' +
-            '  OPTIONAL { ?id pow:date_of_going_mia ?time_mia . }' +
+            // '  OPTIONAL { ?id pow:date_of_going_mia ?time_mia . }' +
             '  OPTIONAL { ?id pow:date_of_death ?death_date . }' +
             '  OPTIONAL { ?id pow:date_of_return ?returned_date . }' +
-            '  OPTIONAL { ?id pow:captivity/pow:location_literal ?camps . }' +
+            '  OPTIONAL { ?id pow:municipality_of_death ?municipality_of_death_uri }' +
+            '  OPTIONAL { ?id pow:municipality_of_death_literal ?municipality_of_death_literal }' +
+            // '  OPTIONAL { ?id pow:captivity/pow:location_literal ?camps . }' +
             ' }';
 
         query = query.replace(/<PROPERTIES>/g, properties.join(' '));
