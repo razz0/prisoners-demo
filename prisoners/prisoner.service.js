@@ -135,6 +135,11 @@
                         pattern: '?id <http://ldf.fi/schema/warsa/sotilaan_aani_magazine> [] .',
                         label: 'Sotilaan Ääni -lehti'
                     },
+                    {
+                        id: 'video',
+                        pattern: '?id <http://ldf.fi/schema/warsa/documented_in_video> [] .',
+                        label: 'Video'
+                    },
                 ],
                 chart: true,
                 enabled: true,
