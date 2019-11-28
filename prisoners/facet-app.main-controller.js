@@ -65,10 +65,11 @@
                 vm.pager = pager;
                 if (vm.tableParams) {
                     vm.tableParams.page(1);
-                    vm.tableParams.reload();
+
                 } else {
                     initializeTable();
                 }
+                vm.tableParams.reload();
             });
         }
     });
