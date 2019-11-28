@@ -121,7 +121,25 @@
                 predicate: '<http://ldf.fi/schema/warsa/prisoners/municipality_of_death>',
                 name: 'DEATH_MUNICIPALITY',
                 services: [PNR_ENDPOINT_CONFIG.endpointUrl]
-            }
+            },
+            additionalMaterial: {
+                facetId: 'additionalMaterial',
+                choices: [
+                    {
+                        id: 'document',
+                        pattern: '?id <http://ldf.fi/schema/warsa/person_document> [] .',
+                        label: 'Asiakirja'
+                    },
+                    {
+                        id: 'sa',
+                        pattern: '?id <http://ldf.fi/schema/warsa/sotilaan_aani_magazine> [] .',
+                        label: 'Sotilaan Ääni -lehti'
+                    },
+                ],
+                chart: true,
+                enabled: true,
+                name: 'ADDITIONAL_MATERIAL'
+            },
         };
 
         var properties = [
