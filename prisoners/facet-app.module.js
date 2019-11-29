@@ -7,7 +7,7 @@
 
     var server = 'https://ldf.fi';
     //var server = 'http://localhost:3038';
-    var SPARQL_ENDPOINT_URL = server + '/warsa-private/sparql';
+    var SPARQL_ENDPOINT_URL = server + '/warsa/sparql';
     var PNR_ENDPOINT_URL = server + '/pnr/sparql';
 
     angular.module('facetApp', [
