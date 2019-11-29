@@ -94,7 +94,8 @@
             numChildren: {
                 facetId: 'numChildren',
                 predicate: '<http://ldf.fi/schema/warsa/prisoners/number_of_children>',
-                name: 'NUM_CHILDREN'
+                name: 'NUM_CHILDREN',
+                specifier: 'BIND(xsd:integer(?value) AS ?value_int) FILTER(BOUND(?value_int))'
             },
             birthPlace: {
                 facetId: 'birthPlace',
