@@ -69,12 +69,14 @@
             rank: {
                 facetId: 'rank',
                 predicate: '<http://ldf.fi/schema/warsa/prisoners/rank>',
-                name: 'RANK'
+                name: 'RANK',
+                chart: true,
             },
             unit: {
                 facetId: 'unit',
                 predicate: '<http://ldf.fi/schema/warsa/prisoners/unit>',
-                name: 'UNIT'
+                name: 'UNIT',
+                chart: true,
             },
             // camps: {
             //     facetId: 'camps',
@@ -84,44 +86,52 @@
             occupation: {
                 facetId: 'occupation',
                 predicate: '<http://ldf.fi/schema/bioc/has_occupation>',
-                name: 'OCCUPATION'
+                name: 'OCCUPATION',
+                chart: true,
             },
             maritalStatus: {
                 facetId: 'maritalStatus',
                 predicate: '<http://ldf.fi/schema/warsa/prisoners/marital_status>',
-                name: 'MARITAL_STATUS'
+                name: 'MARITAL_STATUS',
+                chart: true,
             },
             numChildren: {
                 facetId: 'numChildren',
                 predicate: '<http://ldf.fi/schema/warsa/prisoners/number_of_children>',
                 name: 'NUM_CHILDREN',
-                specifier: 'BIND(xsd:integer(?value) AS ?value_int) FILTER(BOUND(?value_int))'
+                specifier: 'BIND(xsd:integer(?value) AS ?value_int) FILTER(BOUND(?value_int))',
+                chart: true,
             },
             birthPlace: {
                 facetId: 'birthPlace',
                 predicate: '<http://ldf.fi/schema/warsa/municipality_of_birth>',
-                name: 'BIRTH_MUNICIPALITY'
+                name: 'BIRTH_MUNICIPALITY',
+                chart: true,
             },
             residencePlace: {
                 facetId: 'residencePlace',
                 predicate: '<http://ldf.fi/schema/warsa/prisoners/municipality_of_residence>',
-                name: 'RESIDENCE_MUNICIPALITY'
+                name: 'RESIDENCE_MUNICIPALITY',
+                chart: true,
             },
             domicilePlace: {
                 facetId: 'domicilePlace',
                 predicate: '<http://ldf.fi/schema/warsa/prisoners/municipality_of_domicile>',
-                name: 'DOMICILE_MUNICIPALITY'
+                name: 'DOMICILE_MUNICIPALITY',
+                chart: true,
             },
             capturingPlace: {
                 facetId: 'capturingPlace',
                 predicate: '<http://ldf.fi/schema/warsa/prisoners/municipality_of_capture>',
-                name: 'CAPTURE_MUNICIPALITY'
+                name: 'CAPTURE_MUNICIPALITY',
+                chart: true,
             },
             deathPlace: {
                 facetId: 'deathPlace',
                 predicate: '<http://ldf.fi/schema/warsa/prisoners/municipality_of_death>',
                 name: 'DEATH_MUNICIPALITY',
-                services: [PNR_ENDPOINT_CONFIG.endpointUrl]
+                services: [PNR_ENDPOINT_CONFIG.endpointUrl],
+                chart: true,
             },
             additionalMaterial: {
                 facetId: 'additionalMaterial',
