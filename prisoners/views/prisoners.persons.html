@@ -22,13 +22,6 @@
         </a>
       </span>
     </td>
-    <td data-title="'BIRTH_DATE' | translate">
-      <span ng-repeat="time in ::person.birth_date | castArray">
-        <a ws-page-link ng-if="::person.birth_date" ng-href="/times/page/time_{{::time}}-{{::time}}">
-          {{::time | date:'dd.MM.yyyy'}}
-        </a>
-      </span>
-    </td>
     <td data-title="'RANK' | translate">
       <span ng-repeat="rank in ::person.rank | castArray">
         <a ws-page-link ng-href="/ranks/page/{{ ::rank.id | localId }}">{{ ::rank.label }}</a>{{ $last ? '' : ', ' }}
